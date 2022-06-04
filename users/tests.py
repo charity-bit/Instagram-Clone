@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from django.contrib.auth.models import User
 
-from .models import Profile
+from .models import Profile,Follow
 
 
 
@@ -24,7 +24,7 @@ class UserTestClass(TestCase):
     def test_save_method(self):
         self.new_user.save()
         users = User.objects.all()
-        self.assertTrue(len(users) == 1)
+        self.assertEquals(len(users),1)
 
     def test_delete_method(self):
         self.new_user.save()
@@ -32,7 +32,7 @@ class UserTestClass(TestCase):
         test_user.save()
         self.new_user.delete()
         users = User.objects.all()
-        self.assertTrue(len(users) == 1)
+        self.assertEquals(len(users),1)
 
 
         
@@ -63,7 +63,7 @@ class ProfileTestClass(TestCase):
         self.new_profile.save_profile()
         profiles = Profile.objects.all()
 
-        self.assertTrue(len(profiles) == 1)
+        self.assertEquals(len(profiles),1)
 
     def test_delete_profile(self):
         ''''
@@ -88,7 +88,7 @@ class ProfileTestClass(TestCase):
 
         profiles = Profile.objects.all()
 
-        self.assertTrue(len(profiles) == 1)
+        self.assertEquals(len(profiles),1)
 
 
         
@@ -120,8 +120,20 @@ def FollowTestClass(TestCase):
         self.test.save()
         self.test2.save()
 
+    def test_instance(self):
+        self.follow = Follow(account = self.charity,follower = self.test)
+        self.assertTrue(isinstance(self.follow,Follow))
+
     
     def test_follow(self):
+        self.follow = Follow(account = self.charity,follower = self.test)
+        self.follow.follow()
+
+        follow_objects = Follow.objects.all()
+
+        self.assertEquals(follow_objects,1)
+
+    
 
 
 
