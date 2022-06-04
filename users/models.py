@@ -60,6 +60,16 @@ class Follow(models.Model):
         followers = user.followers.all()
         return followers
 
+    @classmethod
+    def get_following(cls,account_id):
+        '''
+        method to get all users that a user is following
+        '''
+
+        following = Follow.filter(account = account_id)
+
+        return following
+
 
 
 

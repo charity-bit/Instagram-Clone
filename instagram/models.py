@@ -15,6 +15,7 @@ class Post(models.Model):
     '''
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='posts')
     image = CloudinaryField('post_image',blank=True)
+    like = models.ManyToManyField(User,related_name='likes',blank=True)
     post_name = models.CharField(max_length=50)
     post_caption = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now) 
@@ -73,14 +74,14 @@ class Comment(models.Model):
     comment = models.TextField()
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='comments')
+    like = models.ManyToManyField(User,related_name='comment_likes',blank=True)
     date_created = models.DateTimeField(default=timezone.now)
 
 
     def __str__(self) -> str:
         return f'{self.user.username} - {self.comment}'
 
-    
-   
+
     @classmethod
     def get_post_comments(cls,post_id):
         '''
