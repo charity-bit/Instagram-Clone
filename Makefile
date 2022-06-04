@@ -12,3 +12,6 @@ shell:
 
 superuser:
 	python3 manage.py createsuperuser
+
+test:
+		python3 manage.py test instagram
