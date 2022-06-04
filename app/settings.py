@@ -11,6 +11,15 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import cloudinary
+import os
+
+import dotenv
+
+# dotenv_path = os.path.joint(os.path.dirname(__file__),'.env')
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +30,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-852uiw&rq)x_9uu=38s3xtiql73au7htv=x8u=8nrp@tiyn9ah'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -78,10 +86,22 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+         'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'insta',
+        'USER': 'hp',
+        'PASSWORD':'qwertyip',
     }
 }
+
+
+# cloudinary configurations
+
+cloudinary.config( 
+  cloud_name = 'dvhid4k2j', 
+  api_key = '538353386825468', 
+  api_secret = 'CtiIbnY_b2iv5HjDO4LKwTAZxN8'
+)
+
 
 
 # Password validation
