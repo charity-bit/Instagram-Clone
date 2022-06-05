@@ -16,6 +16,3 @@ superuser:
 testig:
 	python3 manage.py test instagram
 
-testuser:
-	python3 manage.py test users
-

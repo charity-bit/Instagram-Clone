@@ -1,0 +1,53 @@
+{% extends 'instagram/base.html' %}
+{% load static %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'instagram/css/register.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="logo">
+  </div>
+
+<main>
+   <div class="cont">
+
+    <img src="{% static 'instagram/images/ig.png'%}" class="insta">
+    <div class="intro">
+      <p>Sign up to see photos and </p>
+      <p>videos from your friends</p>
+    </div>
+     
+    <div class="fb">
+      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M2.89 2h14.23c.49 0 .88.39.88.88v14.24c0 .48-.39.88-.88.88h-4.08v-6.2h2.08l.31-2.41h-2.39V7.85c0-.7.2-1.18 1.2-1.18h1.28V4.51c-.22-.03-.98-.09-1.86-.09c-1.85 0-3.11 1.12-3.11 3.19v1.78H8.46v2.41h2.09V18H2.89a.89.89 0 0 1-.89-.88V2.88c0-.49.4-.88.89-.88z"/></svg>
+       <p>Log in with Facebook</p>
+    </div>
+    
+    <div class="or">
+      <div></div>
+      <p>OR</p>
+      <div></div>
+   </div>
+  
+    <form method="POST">
+      {% csrf_token %}
+      {{form}}
+
+       <div class="learn">
+          <p>People who use our service may have uploaded your contact information to Instagram <a href="https://www.facebook.com/help/instagram/261704639352628">Learn More</a></p>
+          <p>By signing up, you agree to our <a href="https://help.instagram.com/581066165581870">Terms ,</a> <a href="https://help.instagram.com/519522125107875/?maybe_redirect_pol=0">Data Policy</a> and <a href="https://help.instagram.com/1896641480634370?ref=ig">Cookies poilicy</a></p>
+       </div>
+      <input type="submit" value="Sign up">
+    </form>
+   </div>
+
+   <div class="sub">
+    <p>Have an account? <a href="{% url 'login' %}">login</a></p>
+   </div>
+    
+
+</main>
+
+{% endblock %}
