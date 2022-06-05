@@ -57,19 +57,29 @@ def home(request):
 
 
 def profile(request,username):
+    user = None
+    full_user = None
     if not request.user.is_authenticated:
         return redirect('login')
-    user = User.objects.filter(username = username).first()
+    try:
+        user = User.objects.get(username = username)
+        full_user = User.objects.filter(username = username).first()
+    except User.DoesNotExist:
+        print('does not exist')
 
     context = {
-        'posts': Post.objects.filter(user = user.id),
-        'user':user,
+        'posts': Post.objects.filter(user = user),
         'followers': Follow.objects.filter(account = user).exclude(follower = user), #get followers excluding the current user/ own account
         'following': Follow.objects.filter(follower = user).exclude(account = user),
-        'follow': Follow.objects.filter(follower = request.user,account = user)
+        'notfollowing': Follow.objects.filter(follower = request.user,account = user),
+        'username':user,
+        'full_user':full_user
 
     }
+   
 
+
+  
     return render(request,'instagram/profile.html',context)
 
 

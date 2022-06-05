@@ -59,3 +59,19 @@ form input{
 form input:focus{
     background-color: #efefef;
 }
+
+.hr{
+    background-color:#dbdbdb;
+    height: 1px;
+    width:100%;
+}
+
+@media screen and (max-width:520px) {
+    .search{
+        display: none;
+    }
+    .icons ul svg{
+        font-size: 4vw;
+    }
+    
+}

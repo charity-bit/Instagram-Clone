@@ -12,11 +12,53 @@
 
 
 <main>
-<!-- nav  to be moved later-->
+<!-- profile details -->
+
+<div class="left">
+    <p><a href="#"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M11 6a3 3 0 1 1-6 0a3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></g></svg></a></p>
+</div>
+
+<div class="right">
+<div class="top">
+    <p>{{username}}</p>
+    {% if request.user.username == username %}
+    <input type="button" value="Edit profile">
+    <p><a href="#"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36"><path fill="currentColor" d="m32.57 15.72l-3.35-1a11.65 11.65 0 0 0-.95-2.33l1.64-3.07a.61.61 0 0 0-.11-.72l-2.39-2.4a.61.61 0 0 0-.72-.11l-3.05 1.63a11.62 11.62 0 0 0-2.36-1l-1-3.31a.61.61 0 0 0-.59-.41h-3.38a.61.61 0 0 0-.58.43l-1 3.3a11.63 11.63 0 0 0-2.38 1l-3-1.62a.61.61 0 0 0-.72.11L6.2 8.59a.61.61 0 0 0-.11.72l1.62 3a11.63 11.63 0 0 0-1 2.37l-3.31 1a.61.61 0 0 0-.43.58v3.38a.61.61 0 0 0 .43.58l3.33 1a11.62 11.62 0 0 0 1 2.33l-1.64 3.14a.61.61 0 0 0 .11.72l2.39 2.39a.61.61 0 0 0 .72.11l3.09-1.65a11.65 11.65 0 0 0 2.3.94l1 3.37a.61.61 0 0 0 .58.43h3.38a.61.61 0 0 0 .58-.43l1-3.38a11.63 11.63 0 0 0 2.28-.94l3.11 1.66a.61.61 0 0 0 .72-.11l2.39-2.39a.61.61 0 0 0 .11-.72l-1.66-3.1a11.63 11.63 0 0 0 .95-2.29l3.37-1a.61.61 0 0 0 .43-.58v-3.41a.61.61 0 0 0-.37-.59ZM18 23.5a5.5 5.5 0 1 1 5.5-5.5a5.5 5.5 0 0 1-5.5 5.5Z" class="clr-i-solid clr-i-solid-path-1"/><path fill="none" d="M0 0h36v36H0z"/></svg></a></p>
+    {% else %}
+    {% if notfollowing %}
+        <a class="followbtn">Following</a>
+    {% else %}
+        {% if full_user not in followers %}
+        <a class="followbtn">Follow back</a>
+        {% else %}
+        <a class="followbtn">Follow</a>
+        {% endif %}
+    {% endif %}
+    {% endif %}
+</div>
+<div class="followers">
+     {% if posts.count == 1 %}
+     <p>{{posts.count}} <span>post</span></p>
+     {% else %}
+     <p>{{posts.count}} <span>posts</span></p>
+
+     {% endif %}
+      
+     <!-- followers -->
+     {% if followers.count == 1 %}
+     <p>{{followers.count}} <span>follower</span></p>
+     {% else %}
+     <p>{{followers.count}} <span>followers</span></p>
+     {% endif %}
+
+     <!-- following -->
+
+     <p>{{following.count}} <span>following</span></p>
+</div>
+</div>
 
 
-
-<!--  -->
+<!-- posts -->
 </main>
 
 {% block scripts %}
