@@ -11,6 +11,7 @@ class Profile(models.Model):
     '''
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     profile_pic = CloudinaryField('profile_image',blank=True)
+    followings = models.ManyToManyField(User,related_name='followings',blank=True)
     name = models.CharField(max_length=50,blank=True)
     bio = models.CharField(max_length=150,blank=True)
 

@@ -6,6 +6,56 @@
 }
 
 
+
 html{
     font-family: 'Roboto', sans-serif;
+}
+.insta{
+   height: 34px; 
+}
+header{
+    width: 80%;
+    margin: 0 auto;
+    padding:1% 0;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.icons ul{
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 20px;
+}
+.icons ul svg{
+    font-size: 2vw;
+}
+
+.icons ul li a {
+    text-decoration: none;
+    color: black;
+    opacity:.8;
+}
+
+.search{
+    width: 25%;
+}
+form{
+    background-color: #efefef;
+    padding: 4%;
+    display: flex;
+    GAP:15px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+form input{
+    border: none;
+    background-color: transparent !important;
+    outline: none;
+}
+form input:focus{
+    background-color: #efefef;
 }
