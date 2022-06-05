@@ -1,0 +1,157 @@
+.helptext{
+    display: none;
+}
+body{
+    background-color: #fafafa;
+}
+
+.insta{
+    height: 52px;
+    aspect-ratio: contain;
+    align-self: center;
+    margin-bottom: 7%;
+}
+
+
+.cont{
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    width: 30%;
+    margin-top: 2%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 4%;
+    padding-bottom: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
+    display: flex;
+    flex-direction: column;
+
+}
+.sub{
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    width: 30%;
+    margin: 1% auto;
+    padding: 2% 4% ;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+label{
+    display: none;
+}
+
+input[type='text'],input[type='password'],input[type='email']{
+    background-color: #fafafa;
+    outline: #fafafa;
+    padding: 3% 2%;
+    border: 1px solid #a8a8a8;
+    border-radius: 2px;
+
+}
+
+input[type='text']:focus,input[type='password']:focus{
+    background-color: #fafafa;
+    outline: #fafafa;
+
+
+}
+
+input[type='submit']{
+    background-color: #0095f7;
+    color: white;
+    text-align: center;
+    border: none;
+    padding: 3%;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+br{
+    display: none;
+}
+
+
+.or{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 5% 0;
+    color:  #a8a8a8;
+    font-weight: 600;
+    font-size: 1.1vw;
+    padding: 2% 0;
+}
+
+.or div{
+    background-color: #a8a8a8;
+    width: 44%;
+    height: 1px;
+}
+
+.intro {
+    margin: 0 auto;
+    color: #a8a8a8;
+    font-weight: 600;
+    font-size: 1.2vw;
+}
+
+
+.fb {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6%;
+    font-size: 1.2vw;
+    font-weight: 600;
+    color: white;
+    background-color: #0095f7;
+    padding: 3% 2%;
+    border-radius: 3px;
+
+}
+.fb svg{
+    font-size: 1.5vw;
+}
+
+
+.sub p{
+    text-align: center;
+    font-size: 1.1vw;
+}
+.sub p a {
+    text-decoration: none;
+    color:#0095f7
+}
+
+.learn{
+    color:#a8a8a8;
+    font-size: 1vw;
+    text-align: center;
+}
+.learn p{
+    margin: 2% 0;
+}
+
+.learn p a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #a8a8a8;
+}
+
+.learn p:nth-child(2){
+    margin-top: 4%;
+    margin-bottom: 2%;
+
+}
+
+input:disabled{
+
+    background-color:#b1dffc ;
+    }
