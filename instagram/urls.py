@@ -13,6 +13,7 @@ urlpatterns = [
 
     # profile
     path('profile/<str:username>/',views.profile,name='profile'),
+    # path('follow',views.follow,name='follow'),
 
     path('timeline/',views.home,name='home'),
 

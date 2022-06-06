@@ -231,6 +231,7 @@ main{
     padding: 5% 0;  
     display: flex;
     font-size: 1vw;
+    cursor: pointer;
     gap: 20px; 
 }
 .following ul li svg{
@@ -245,6 +246,7 @@ main{
     text-decoration: none;
     display: flex;
     align-items: center;
+    cursor: pointer;
     position: relative;
     font-weight: 400;
 }
@@ -265,25 +267,6 @@ main{
     width: 100%;
     height: 1px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .cancel{
     background-color: white;
@@ -378,21 +361,118 @@ main{
 .post img{
     height:412px;
     aspect-ratio: contain;
-    width: 270px;
-    
+    width: 270px;   
   
 }
 
-.post:hover :nth-child(2){ 
+/* .post:hover :nth-child(2){ 
     background-color: rgba(0, 0, 0, .4);
     opacity:1;
-}
+} */
 
 .post p a span{
     background-color: transparent;
 }
+/* post details */
+.post-details{
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, .7);
+    top:0;
+    left:0;
+    height: 100%;
+    width:100%;
+    /* display: none; */
+    align-items: center;
+    animation: showlogout 1s ease 0s 1 normal forwards;
+}
+
+.detail{
+    width: 90%;
+    height: 80%;
+    background-color: white;
+    position: absolute;
+    display: flex;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition:all .2s ease-in-out;
+}
+
+.img2{
+    width: 60%;
+    height: 100%;
+    margin: auto 0;
+}
+.img2 img{
+    width: 100%;
+    height: 100%;
+    margin:auto 0;
+} 
+.comments-section{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
 
+
+.close-btn{
+    position: absolute;
+    right:3%;
+    top:3%;
+    color: #fff;
+    font-size: 2.5vw;
+}
+
+.author{
+    display: flex;
+    margin: 2% 3%;
+    gap:10px;
+    padding: 2% 5%;
+    align-items: center;
+}
+
+.author a{
+    color:#000;
+    text-decoration: black;
+    font-size: 1.5vw;
+    display: flex;
+    align-items: center;
+}
+.author svg,.comment svg{
+    color: #dbdbdb ;
+    font-size: 2vw;
+}
+.separator{
+    background-color: #dbdbdb ;
+    width: 132%;
+    height: 1px;
+}
+
+.comment{
+    padding: 2% 5%;
+    margin: 2% 3%;
+}
+
+.user
+{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.1vw;
+    color: #111;
+    font-weight: 600;
+    gap: 10px;
+}
+
+.content{
+    color: #a8a8a8;
+    font-size: .9vw;
+    margin: 2% 13%;
+   
+}
 
 @keyframes showlogout {
 	0% {

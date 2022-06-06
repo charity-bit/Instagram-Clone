@@ -11,7 +11,8 @@ class Profile(models.Model):
     '''
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     profile_pic = CloudinaryField('profile_image',blank=True)
-    followings = models.ManyToManyField(User,related_name='followings',blank=True)
+    followings = models.ManyToManyField(User,related_name='ings',blank=True)
+    followers = models.ManyToManyField(User,related_name='owers',blank=True)
     name = models.CharField(max_length=50,blank=True)
     bio = models.CharField(max_length=150,blank=True)
 
@@ -135,8 +136,8 @@ class Post(models.Model):
     
 class Comment(models.Model):
     comment = models.TextField()
-    post = models.ForeignKey(Post,on_delete=models.CASCADE)
-    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='comments')
+    post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     like = models.ManyToManyField(User,related_name='comment_likes',blank=True)
     date_created = models.DateTimeField(default=timezone.now)
 

@@ -89,5 +89,25 @@ def profile(request,username):
     return render(request,'instagram/profile.html',context)
 
 
+def follow(request):
+    if request.method == 'GET':
+        account_id = request.GET.get('user_id')
+        account = User.objects.get(id=account_id)
+
+        # chech exists
+        user = Follow.objects.filter(account=account,follower = request.user)
+
+        
+        if user.exists():
+            user.delete()
+        else:
+            follow_obj = Follow(account=account,follower = request.user)
+            follow_obj.save()
+
+        return HttpResponse(account.followers.count())
+
+    else:
+        return HttpResponse('Error!')
+
 
 
