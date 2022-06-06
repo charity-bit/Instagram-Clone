@@ -64,3 +64,87 @@ main{
 .followers p {
     font-weight: 600;
 }
+
+.bio{
+    margin-top: 5%;
+    width: 50%;
+    line-height: 23px;
+}
+
+.hr{
+    height: 1px;
+    background-color: #dbdbdb;
+    width: 70%;
+    margin:0 auto;
+}
+
+.l-followers {
+    margin: 5% 0;
+    color: #a8a8a8;
+    font-size: .8vw;
+}
+
+.l-followers a {
+    font-weight: 600;
+    text-decoration: none;
+    color:#a8a8a8
+}
+
+
+.logout{
+    position: absolute;
+    background-color: rgba(0, 0, 0, .7);
+    top:0;
+    left:0;
+    height: 100vh;
+    width:100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: showlogout 1s ease 0s 1 normal forwards;
+}
+
+.cancel{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    padding: 0 7%;
+    border-radius: 4px;
+}
+
+.cancel a {
+    text-decoration: none;
+    color:black;
+    font-size: 1vw;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.cancel a:nth-child(1)::after{
+    position: absolute;
+    content:"";
+    background-color: #000;
+    bottom:50%;
+    left:0;
+    right: 0;
+    height: 1px;
+    width: 100%;
+}
+
+
+@keyframes showlogout {
+	0% {
+		opacity: 0;
+		transform: scale(0.6);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}

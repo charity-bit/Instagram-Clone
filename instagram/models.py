@@ -40,8 +40,8 @@ class Follow(models.Model):
     account = models.ForeignKey(User,on_delete=models.CASCADE,related_name = 'followers',default=0)
     follower = models.ForeignKey(User,on_delete=models.CASCADE,related_name = 'follower',default=0)
 
-    def __str__(self) -> str:
-        return f'{self.follower} following f{self.account}'
+    def __str__(self):
+        return str(self.follower)
 
     def follow(self):
         self.save()

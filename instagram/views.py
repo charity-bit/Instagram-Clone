@@ -1,6 +1,8 @@
+from re import template
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.urls import reverse_lazy
+
 
 
 from django.contrib.auth.views import LoginView
@@ -52,34 +54,38 @@ def register(request):
 
 
 def home(request):
-    return HttpResponse('home')
+    return  render(request,'instagram/timeline.html')
 
 
 
 def profile(request,username):
     user = None
     full_user = None
+    counted = None
     if not request.user.is_authenticated:
         return redirect('login')
     try:
         user = User.objects.get(username = username)
         full_user = User.objects.filter(username = username).first()
+        
     except User.DoesNotExist:
-        print('does not exist')
+        print('user not found')
 
+    count = len(Follow.objects.filter(account = user).exclude(follower = user))
+    if count > 3:
+        counted = count - 3
+        
+            
     context = {
         'posts': Post.objects.filter(user = user),
         'followers': Follow.objects.filter(account = user).exclude(follower = user), #get followers excluding the current user/ own account
         'following': Follow.objects.filter(follower = user).exclude(account = user),
         'notfollowing': Follow.objects.filter(follower = request.user,account = user),
         'username':user,
-        'full_user':full_user
+        'full_user':full_user,
+        'counted':counted
 
-    }
-   
-
-
-  
+    }  
     return render(request,'instagram/profile.html',context)
 
 

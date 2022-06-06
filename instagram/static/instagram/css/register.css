@@ -40,6 +40,7 @@ form{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    background-color: white;
 
 }
 label{
@@ -47,7 +48,7 @@ label{
 }
 
 input[type='text'],input[type='password'],input[type='email']{
-    background-color: #fafafa;
+    background-color: #fafafa !important;
     outline: #fafafa;
     padding: 3% 2%;
     border: 1px solid #a8a8a8;
@@ -63,7 +64,7 @@ input[type='text']:focus,input[type='password']:focus{
 }
 
 input[type='submit']{
-    background-color: #0095f7;
+    background-color: #0095f7 !important;
     color: white;
     text-align: center;
     border: none;
