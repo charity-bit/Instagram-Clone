@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jun  5 19:44:54 2022
+# Make data base, printed on Mon Jun  6 08:48:57 2022
 
 # Variables
 
@@ -25,7 +25,7 @@ SNAP_INSTANCE_KEY =
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-c5e35931-9681-4975-9847-7e9a4ad91b85.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-fc18d51c-ace2-40c5-9a35-6fc505340385.sock
 # environment
 LC_NAME = sw_KE
 # environment
@@ -109,7 +109,7 @@ SNAP_REEXEC =
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 8674
+VSCODE_PID = 2349
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -117,7 +117,7 @@ XDG_SESSION_TYPE = x11
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/hp-HP-EliteBook-x360-1030-G2:@/tmp/.ICE-unix/1262,unix/hp-HP-EliteBook-x360-1030-G2:/tmp/.ICE-unix/1262
+SESSION_MANAGER = local/hp-HP-EliteBook-x360-1030-G2:@/tmp/.ICE-unix/1276,unix/hp-HP-EliteBook-x360-1030-G2:/tmp/.ICE-unix/1276
 # automatic
 *F = $(notdir $*)
 # environment
@@ -163,7 +163,7 @@ LC_TIME = sw_KE
 # environment
 SNAP = /snap/code/97
 # environment
-INVOCATION_ID = c1bcf1d55ae74362ac37a5cb25cae368
+INVOCATION_ID = e1463084cb2c48ed9869f2e2c71deb35
 # environment
 SNAP_REVISION = 97
 # environment
@@ -199,7 +199,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := serve
 # environment
-SYSTEMD_EXEC_PID = 1283
+SYSTEMD_EXEC_PID = 1301
 # environment
 DISPLAY = :0
 # environment
@@ -215,11 +215,11 @@ SNAP_DATA = /var/snap/code/97
 # environment
 SNAP_CONTEXT = obY4oXPuGe0B8ERILtAahiFUYtiBntHqt_DhMVMc8gTjpzcAIR1j
 # environment
-MANAGERPID = 985
+MANAGERPID = 988
 # environment
 LC_MEASUREMENT = sw_KE
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 8608
+GIO_LAUNCHED_DESKTOP_FILE_PID = 1937
 # environment
 _ = /snap/code/97/usr/share/code/code
 # environment
@@ -233,7 +233,7 @@ GDK_PIXBUF_MODULE_FILE = /home/hp/snap/code/common/.cache/gdk-pixbuf-loaders.cac
 # environment
 NVM_CD_FLAGS = 
 # environment
-JOURNAL_STREAM = 8:29249
+JOURNAL_STREAM = 8:31959
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -279,7 +279,6 @@ LC_IDENTIFICATION = sw_KE
 # environment
 SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
 # variable set hash-table stats:
- 
 # Load=133/1024=13%, Rehash=0, Collisions=5/163=3%
 
 # Pattern-specific Variable Values
@@ -289,6 +288,7 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 # Directories
 
 # . (device 2050, inode 13898029): 14 files, no impossibilities.
+ 
 
 # 14 files, no impossibilities in 1 directories.
 
@@ -374,6 +374,6 @@ serve:
 # strcache performance: lookups = 35 / hit rate = 28%
 # hash-table stats:
 # Load=25/8192=0%, Rehash=0, Collisions=0/35=0%
-# Finished Make data base on Sun Jun  5 19:44:54 2022
+# Finished Make data base on Mon Jun  6 08:48:57 2022
 
  

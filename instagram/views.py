@@ -77,7 +77,7 @@ def profile(request,username):
         
             
     context = {
-        'posts': Post.objects.filter(user = user),
+        'posts': Post.objects.filter(user = user).order_by('-date_posted'),
         'followers': Follow.objects.filter(account = user).exclude(follower = user), #get followers excluding the current user/ own account
         'following': Follow.objects.filter(follower = user).exclude(account = user),
         'notfollowing': Follow.objects.filter(follower = request.user,account = user),

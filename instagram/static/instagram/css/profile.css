@@ -63,12 +63,14 @@ main{
 }
 .followers p {
     font-weight: 600;
+    font-size: 1.3vw;
 }
 
 .bio{
     margin-top: 5%;
     width: 50%;
     line-height: 23px;
+    font-size: 1.3vw;
 }
 
 .hr{
@@ -92,7 +94,8 @@ main{
 
 
 .logout{
-    position: absolute;
+    position: fixed;
+    z-index: 2;
     background-color: rgba(0, 0, 0, .7);
     top:0;
     left:0;
@@ -103,6 +106,184 @@ main{
     justify-content: center;
     animation: showlogout 1s ease 0s 1 normal forwards;
 }
+
+.followers-cont{
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, .7);
+    top:0;
+    left:0;
+    height: 100vh;
+    width:100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    
+    animation: showlogout 1s ease 0s 1 normal forwards;
+}
+
+.followers-list{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top:50%;
+    left:50%;
+    width: 40%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    transform: translate(-50%,-50%);
+    padding: 1% 0;
+    border-radius: 4px
+}
+.s-followers{
+    cursor: pointer;
+}
+.followers-list ul{
+    padding: 0% 3%;
+}
+
+.followers-list ul li{
+    list-style: none;
+    padding: 5% 0;  
+    display: flex;
+    font-size: 1vw;
+    gap: 20px; 
+}
+.followers ul li svg{
+    color:#a8a8a8;
+    font-size: 2vw;
+}
+.ex{
+    margin-left: auto;
+}
+.followers-list ul li a{
+    color:black;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-weight: 400;
+}
+
+.followers-cont p:nth-child(1) a{
+    margin: 1% 10%;
+    font-size: 1.4vw;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    gap:20px;
+
+}
+.hor{
+    background-color: #a8a8a8;
+    width: 100%;
+    height: 1px;
+}
+
+
+
+
+
+
+
+
+.following-cont{
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, .7);
+    top:0;
+    left:0;
+    height: 100vh;
+    width:100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    
+    animation: showlogout 1s ease 0s 1 normal forwards;
+}
+
+.following-list{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top:50%;
+    left:50%;
+    width: 40%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    transform: translate(-50%,-50%);
+    padding: 1% 0;
+    border-radius: 4px
+}
+.s-following{
+    cursor: pointer;
+}
+.following-list ul{
+    padding: 0% 3%;
+}
+
+.following-list ul li{
+    list-style: none;
+    padding: 5% 0;  
+    display: flex;
+    font-size: 1vw;
+    gap: 20px; 
+}
+.following ul li svg{
+    color:#a8a8a8;
+    font-size: 2vw;
+}
+.exx{
+    margin-left: auto;
+}
+.following-list ul li a{
+    color:black;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-weight: 400;
+}
+
+.following-cont p:nth-child(1) a{
+    margin: 1% 10%;
+    font-size: 1.4vw;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    gap:20px;
+
+}
+.horr{
+    background-color: #a8a8a8;
+    width: 100%;
+    height: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .cancel{
     background-color: white;
@@ -135,6 +316,82 @@ main{
     height: 1px;
     width: 100%;
 }
+.posts-ttl{
+    position: relative;
+}
+
+.posts-ttl a{
+    display: flex;
+    color: #000;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+
+}
+    
+.posts-ttl a::before{
+    position: absolute;
+    content:"";
+    background-color: #000;
+    top:0;
+    left:50%;
+    transform: translateX(-50%);
+    right: 0;
+    height: 1px;
+    width: 4%;
+
+}
+
+
+.posts{
+    width:70%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(270px,1fr));
+    margin:2% auto;
+    gap: 20px;
+}
+
+.post{
+    position: relative;
+    
+}
+.comments-div{
+  position: absolute;
+  top:0;
+  left: 0;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  row-gap: 20px;
+  display: flex;
+  height: 100%;
+  width: 270px;
+  opacity: 0;
+  transition:all .2s ease-in-out;
+}
+
+.comments-div a{
+    text-decoration: none;
+    color: #fff;
+}
+.post img{
+    height:412px;
+    aspect-ratio: contain;
+    width: 270px;
+    
+  
+}
+
+.post:hover :nth-child(2){ 
+    background-color: rgba(0, 0, 0, .4);
+    opacity:1;
+}
+
+.post p a span{
+    background-color: transparent;
+}
+
 
 
 @keyframes showlogout {
