@@ -16,8 +16,12 @@
    {% for post in posts %}
     <div class="post">
       <a class="top" href="{% url 'profile' post.user %}">
+        {% if post.user.profile.profile_pic %}
         <img src="{{post.user.profile.profile_pic.url}}" alt="" class="profile-img">
-         <p>{{post.user.username}}</p>
+        {% else %}
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M11 6a3 3 0 1 1-6 0a3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></g></svg>
+        {% endif %}
+        <p>{{post.user.username}}</p>
       </a>
       <div class="separator"></div>
       <div class="img">
@@ -36,7 +40,7 @@
          </div>
       </div>
     
-      <p class="likes" id="like_count"> <span class="div-likes">{{post.like_count}}</span>
+      <p class="likes" id="like_count"> <span class="div-likes">{{post.like.count}}</span>
          likes </p>
       
       <p class="caption"><span>{{post.user}}</span> {{post.post_caption}}</p>

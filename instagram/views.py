@@ -4,7 +4,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
-from  django.views.generic import CreateView
+from  django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 
@@ -18,7 +18,7 @@ from .forms import RegistrationForm,CustomAuthForm,PostForm
 
 
 
-from .models import Follow, User,Post,Comment
+from .models import Follow, Profile, User,Post,Comment
 
 
 # Create your views here.
@@ -37,7 +37,7 @@ class CustomLoginView(LoginView):
 
 
 
-
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -116,10 +116,13 @@ def follow(request):
             result = account.followers.count()
         else:
             foll_obj = Follow(account=account, follower=request.user)  
-            foll_obj.save() 
-            result = account.followers.count()
+            foll_obj.save()
+            if len(Follow.objects.filter(account=account, follower=request.user)) == 2:
+                Follow.objects.filter(account=account, follower=request.user).first().delete()
 
-        return  JsonResponse({'result':result})
+            
+
+        return  HttpResponse(account.followers.count())
         
     
 
@@ -168,7 +171,29 @@ def like(request):
             result = post.like_count
             post.save()
         # print(result)
-        return JsonResponse({'result':result,})
+        return JsonResponse({'result':post.like.count()})
+
+
+class UpdateProfile(UpdateView):
+    model = Profile
+    fields = ['profile_pic','name','bio']
+    template_name = 'instagram/edit_profile.html'
+
+
+
+    def get_queryset(self):
+        base_qs = super(UpdateProfile,self).get_queryset()  # return queryset of Profile model
+        return base_qs.filter(user=self.request.user)   #filter where user = current_user
+
+    def get_success_url(self):
+        return reverse_lazy('profile',kwargs={
+            'username': self.request.user.username # on success edit return to profile page
+        })
+
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(UpdateProfile,self).form_valid(form)
 
 
 

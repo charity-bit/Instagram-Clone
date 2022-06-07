@@ -3,6 +3,7 @@
 {% load static %}
 
 
+
 {% block styles %}
 <link rel="stylesheet" href="{% static 'instagram/css/profile.css' %}">
 
@@ -17,14 +18,19 @@
 <!-- profile details -->
 
 <div class="left">
+    {% if full_user.profile.profile_pic.url %}
+    <img src="{{username.profile.profile_pic.url}}" alt="" class="profile-img">
+    {% else%}
     <p><a href="#"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M11 6a3 3 0 1 1-6 0a3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></g></svg></a></p>
+    {% endif %}
 </div>
 
 <div class="right">
 <div class="top">
     <p>{{username}}</p>
     {% if request.user == username %}
-    <input type="button" value="Edit profile">
+     <a class="edit-p"
+     href="{% url 'update-profile' username.profile.id %}">Edit Profile</a>
     <p id="cog"><a class="cog"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36"><path fill="currentColor" d="m32.57 15.72l-3.35-1a11.65 11.65 0 0 0-.95-2.33l1.64-3.07a.61.61 0 0 0-.11-.72l-2.39-2.4a.61.61 0 0 0-.72-.11l-3.05 1.63a11.62 11.62 0 0 0-2.36-1l-1-3.31a.61.61 0 0 0-.59-.41h-3.38a.61.61 0 0 0-.58.43l-1 3.3a11.63 11.63 0 0 0-2.38 1l-3-1.62a.61.61 0 0 0-.72.11L6.2 8.59a.61.61 0 0 0-.11.72l1.62 3a11.63 11.63 0 0 0-1 2.37l-3.31 1a.61.61 0 0 0-.43.58v3.38a.61.61 0 0 0 .43.58l3.33 1a11.62 11.62 0 0 0 1 2.33l-1.64 3.14a.61.61 0 0 0 .11.72l2.39 2.39a.61.61 0 0 0 .72.11l3.09-1.65a11.65 11.65 0 0 0 2.3.94l1 3.37a.61.61 0 0 0 .58.43h3.38a.61.61 0 0 0 .58-.43l1-3.38a11.63 11.63 0 0 0 2.28-.94l3.11 1.66a.61.61 0 0 0 .72-.11l2.39-2.39a.61.61 0 0 0 .11-.72l-1.66-3.1a11.63 11.63 0 0 0 .95-2.29l3.37-1a.61.61 0 0 0 .43-.58v-3.41a.61.61 0 0 0-.37-.59ZM18 23.5a5.5 5.5 0 1 1 5.5-5.5a5.5 5.5 0 0 1-5.5 5.5Z" class="clr-i-solid clr-i-solid-path-1"/><path fill="none" d="M0 0h36v36H0z"/></svg></a></p>
     <div class="logout" id="log">
         <div class="cancel">
@@ -35,15 +41,14 @@
     </div>
     
     {% else %}
+    <!-- follow buttons -->
         {% if notfollowing %}
         <button class="followbtn" id="{{username.id}}" bool="true">Following</button>
         {% else %}
         <button class="followbtn" id="{{username.id}}" bool="false">follow</button>
         {% endif %}
-       
-        
-       
-  
+        <!-- end of follow buttons -->
+    
     {% endif %}
 </div>
 <div class="followers">
@@ -170,7 +175,7 @@
         
      {% for post in posts %}
      
-           <div class="post">
+            <div class="post">
             <img src="{{post.image.url}}" alt="{{post.post_caption}}" class="img">
             <div class="comments-div">
              <p><a href="#"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M4.25 17.31a.75.75 0 0 1-.72-1l1.25-4.12a6.64 6.64 0 0 1-.4-2.19a6.36 6.36 0 0 1 .51-2.51a6.48 6.48 0 0 1 10.53-2.1a6.66 6.66 0 0 1 1.38 2.06a6.46 6.46 0 0 1 0 5a6.66 6.66 0 0 1-1.38 2.06A6.48 6.48 0 0 1 8.59 16l-4.12 1.28a.83.83 0 0 1-.22.03ZM10.84 5a4.9 4.9 0 0 0-1.93.39A5 5 0 0 0 6.27 8a5 5 0 0 0 0 3.87a.75.75 0 0 1 0 .51l-.92 3l3-.92a.75.75 0 0 1 .51 0a5 5 0 0 0 6.51-2.64A5 5 0 0 0 10.84 5Z"/><path fill="currentColor" d="M19.75 20.5a.83.83 0 0 1-.22 0l-4.12-1.25a6.42 6.42 0 0 1-8.17-3.48a.73.73 0 0 1 .38-1a.75.75 0 0 1 1 .38a5.06 5.06 0 0 0 1 1.53a5 5 0 0 0 5.44 1.06a.75.75 0 0 1 .51 0l3 .92l-.92-3a.75.75 0 0 1 0-.51a4.9 4.9 0 0 0 .39-1.93a4.93 4.93 0 0 0-1.45-3.51a5.62 5.62 0 0 0-.67-.71a.75.75 0 1 1 .84-1.24a6.69 6.69 0 0 1 1 .79a6.49 6.49 0 0 1 1.38 2.06a6.38 6.38 0 0 1 .51 2.52a6.63 6.63 0 0 1-.4 2.25l1.25 4.12a.75.75 0 0 1-.72 1Z"/></svg> <span>0</span></a></p>
@@ -256,19 +261,21 @@
 <!-- save comment -->
 <script>
     $(document).ready(function(){
+        var comments = document.querySelector('.comments');
       $('.save-comment').on('click',function(){
            var _comment = $('.comment-text').val()
            var _user = $(this).data('user');
-           var _post = $(this).data('post');
+           var post = $(this).data('post');
 
         //    ajax
 
         $.ajax({
             url:'/add-comment/',
             type:'post',
+            action:'post',
             data:{
                comment:_comment,
-               post:_post,
+               post:post,
                csrfmiddlewaretoken:"{{csrf_token}}"
             },
             dataType:'json',
@@ -279,6 +286,8 @@
                 console.log(res)
                 if(res.bool == true){
                     $('.comment-text').val(''); 
+                       var _html = '<p>'+_comment+'</p>';
+                                        comments.append(_html) 
                 }
                 $('.save-comment').removeClass('disabled').text('Submit')
 
@@ -289,13 +298,16 @@
 
     })
 </script>
+
+
+
 <!-- follow -->
 <script>
 
 $(document).ready(function(){
-      
-    $('.followbtn').on('click',function(e){
-        e.preventDefault()
+      var btn = document.querySelector('.followbtn')
+    $(btn).on('click',function(){
+       
     var id  = $(this).attr('id')
     var bool;
     bool = $(this).attr('bool');
@@ -303,7 +315,6 @@ $(document).ready(function(){
         type:'POST',
         csrfmiddlewaretoken:"{{csrf_token}}",
         url:'/follow/',
-        action:'post',
         data:{
             user_id:$(this).attr('id')
         },
@@ -317,7 +328,7 @@ $(document).ready(function(){
             $('#'+id).text('Following')
              $('#'+id).attr('bool','true')
          }
-         document.querySelector('.s-followers').firstElementChild.innerHTML = res['result']
+         document.querySelector('.s-followers').firstElementChild.innerText = res
          console.log(res)
 
         }
@@ -330,6 +341,10 @@ $(document).ready(function(){
 
 
  </script>
+
+
+
+
 {% endblock %}
 
 {% endblock %}

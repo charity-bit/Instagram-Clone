@@ -9,21 +9,42 @@ body{
 .cont form{
     display: flex;
     flex-direction: column;
-    box-shadow: 1px 0px 1px 1px rgba(0,0,0,0.24);
--webkit-box-shadow: 3px -6px 11px 1px rgba(0,0,0,0.24);
--moz-box-shadow: 3px -6px 11px 1px rgba(0,0,0,0.24);
-background-color: #fff;
 }
 
-input[type='submit'],input[type='file']{
+.ttl{
+    background-color:#efefef;
+    padding:2% 4%;
+
+}
+.separator{
+    background-color:#a8a8a8;
+    height: 1px;
+    width: 100%;
+}
+
+.cont form label{
+    display: none;
+}
+
+input[type='submit']{
     background-color:#0095f6 !important;
+    align-self: center;
+
+}
+input[type='submit'],input[type='file']{
+    width: 30%;
+    border-radius: 4px;
     color: white;
     font-weight: 600;
     padding: 2% 2%;
-
 }
-input[type='submit']{
-    align-self: center;
+
+input[type='file']{
+    align-self: left;
     width: 30%;
-    border-radius: 4px;
+}
+
+textarea{
+    border: none;
+    background-color: transparent;
 }

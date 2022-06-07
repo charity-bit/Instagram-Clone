@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from django.contrib.auth.views import LogoutView
 
-from .views import CustomLoginView,AddpostView
+from .views import CustomLoginView,AddpostView,UpdateProfile
 
 urlpatterns = [
 
@@ -16,8 +16,11 @@ urlpatterns = [
     path('add-comment/',views.save_comment,name='comment'),
     path('add-like/',views.like,name='like'),
     path('follow/',views.follow,name='follow'),
-    path('post/',AddpostView.as_view(),name='post'),
+    path('profile/<int:pk>/edit/',UpdateProfile.as_view(),name='update-profile'),
 
+
+    # posts
+    path('post/',AddpostView.as_view(),name='post'),
     path('timeline/',views.home,name='home'),
 
 ]

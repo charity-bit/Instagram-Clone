@@ -94,24 +94,23 @@ const btn = document.querySelector('.close-btn');
 const posts = document.querySelectorAll('.post');
 
 
-
-
-posts.forEach(function(post){
-   const details = post.lastElementChild;
-    
-   post.addEventListener('click',()=>{
-       details.style.display = 'flex';
-       document.body.style.overflow = 'hidden';
-   })
-
-   btn.addEventListener('click',(e)=>{
-       console.log(btn)
-    btn.parentElement.parentElement.style.display = 'none'
-    // post.display='flex'
-    
+ posts.forEach(function(post){
+    post.addEventListener('click',()=>{
+        console.log(post)
+     
+     post.lastElementChild.style.display = 'none';
+        document.body.style.overflow = 'hidden';
     })
-})
-
+ 
+    btn.addEventListener('click',()=>{
+        console.log(btn)
+     btn.parentElement.parentElement.style.display = 'none'
+     // post.display='flex'
+     
+     })
+ })
+ 
+  
 
 
 

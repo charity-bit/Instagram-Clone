@@ -8,7 +8,10 @@ body{
     border-radius: 50%;
     aspect-ratio: contain;
 }
-
+.top svg{
+    color: #a8a8a8;
+    font-size: 2vw;
+}
 
 .posts{
     width: 45%;

@@ -29,12 +29,14 @@ main{
     font-size: 2vw;
 }
 
-.top input[type='button']{
+ .edit-p{
     background-color: #fff;
     padding: 1% 2%;
     border: 1px solid #dbdbdb;
     border-radius: 4px;
+    color: #000;
     font-family: 600;
+    text-decoration: none;
 }
 .top p a {
     font-size: 1.8vw;
@@ -500,6 +502,15 @@ textarea{
     margin-top: 2%;
     color: #000;
     font-weight: 400;
+}
+
+
+.profile-img{
+    height: 10vw;
+    width: 10vw;
+    border-radius: 50%;
+    aspect-ratio: contain;
+    margin-left: 50%;
 }
 @keyframes showlogout {
 	0% {
