@@ -103,19 +103,24 @@ posts.forEach(function(post){
        details.style.display = 'flex';
        document.body.style.overflow = 'hidden';
    })
-   btn.addEventListener('click',()=>{
-    details.style.display = 'none'
-    console.log( details.style.display)
-})
-
-
    
-
-
+ 
     
-     
+   
 })
 
+posts.forEach(function(post){
+    const details = post.lastElementChild;
+     btn.addEventListener('click',(e)=>{
+         console.log(e.target.nextSibling.parentElement.parentElement.style.display)
+         e.target.nextSibling.parentElement.parentElement.style.display = 'none'
+         console.log(e.target.nextSibling.parentElement.parentElement.style.display)
+         
+         
+    })
+      
+    
+ })
 
 
 

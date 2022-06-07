@@ -13,7 +13,8 @@ urlpatterns = [
 
     # profile
     path('profile/<str:username>/',views.profile,name='profile'),
-    # path('follow',views.follow,name='follow'),
+    path('add-comment/',views.save_comment,name='comment'),
+    path('add-like/',views.like,name='like'),
 
     path('timeline/',views.home,name='home'),
 

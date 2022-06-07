@@ -80,14 +80,15 @@ class Post(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='posts')
     image = CloudinaryField('post_image',blank=True)
     like = models.ManyToManyField(User,related_name='likes',blank=True)
+    like_count = models.BigIntegerField(default=0)
     post_name = models.CharField(max_length=50)
     post_caption = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now) 
 
 
 
-    def __str__(self) -> str:
-        return f'{self.post_name} - {self.post_caption}'
+    def __str__(self):
+        return str(self.id)
 
     
     def save_post(self):

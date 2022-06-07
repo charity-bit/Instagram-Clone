@@ -179,7 +179,8 @@
 
             <div class="post-details">
                 <div class="close-btn">
-                    <a class="close-b"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="m563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8L295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512L196.9 824.9A7.95 7.95 0 0 0 203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1l216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"/></svg>
+                    <a class="close-b">
+                      X
                     </a>
                 </div>
                 <div class="detail">
@@ -189,7 +190,12 @@
                     <div class="comments-section">
                         <div class="author">
                             <a href="{% url 'profile' post.user %}"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="none" d="M8.007 24.93A4.996 4.996 0 0 1 13 20h6a4.996 4.996 0 0 1 4.993 4.93a11.94 11.94 0 0 1-15.986 0ZM20.5 12.5A4.5 4.5 0 1 1 16 8a4.5 4.5 0 0 1 4.5 4.5Z"/><path fill="currentColor" d="M26.749 24.93A13.99 13.99 0 1 0 2 16a13.899 13.899 0 0 0 3.251 8.93l-.02.017c.07.084.15.156.222.239c.09.103.187.2.28.3c.28.304.568.596.87.87c.092.084.187.162.28.242c.32.276.649.538.99.782c.044.03.084.069.128.1v-.012a13.901 13.901 0 0 0 16 0v.012c.044-.031.083-.07.128-.1c.34-.245.67-.506.99-.782c.093-.08.188-.159.28-.242c.302-.275.59-.566.87-.87c.093-.1.189-.197.28-.3c.071-.083.152-.155.222-.24ZM16 8a4.5 4.5 0 1 1-4.5 4.5A4.5 4.5 0 0 1 16 8ZM8.007 24.93A4.996 4.996 0 0 1 13 20h6a4.996 4.996 0 0 1 4.993 4.93a11.94 11.94 0 0 1-15.986 0Z"/></svg></a>
-                             <p><a href="{% url 'profile' post.user %}">{{post.user}}</a></p>
+                             <div>
+                                <p><a href="{% url 'profile' post.user %}">{{post.user}}</a></p>
+                                <span class="cap">{{post.post_caption}}</span>
+                             </div>
+                           
+                             
                             
                         </div>
                         <div class="separator"></div>
@@ -210,11 +216,21 @@
                                
                             </div>
                             
+                            
                         {% endfor %}
                         </div>
+                        <div class="separator"></div>
+                        <div class="post-comment">
+                            
+                            <textarea class="comment-text" placeholder="add comment ..."></textarea>
+                            <button class="save-comment" 
+                            data-user="{{request.user}}" data-post="{{post}}">Submit</button>
+                        </div>
+                       
                       
 
                     </div>
+                   
                 </div>
             </div>
 
@@ -222,7 +238,7 @@
 
            </div>
     
-
+        {% csrf_token %}
      {% endfor %}
      {% endif %}
  </div>
@@ -231,7 +247,44 @@
 
 {% block scripts %}
 <script src="{% static 'instagram/js/profile.js'%}"></script>
+<script>
+    $(document).ready(function(){
+      $('.save-comment').on('click',function(){
+           var _comment = $('.comment-text').val()
+           var _user = $(this).data('user');
+           var _post = $(this).data('post');
 
+        //    ajax
+
+        $.ajax({
+            url:'/add-comment/',
+            type:'post',
+            data:{
+               comment:_comment,
+               post:_post,
+               csrfmiddlewaretoken:"{{csrf_token}}"
+            },
+            dataType:'json',
+            beforeSend:function(){
+                $('.save-comment').addClass('disabled').text('saving ... ')
+            },
+            success:function(res){
+                console.log(res)
+                if(res.bool == true){
+                    $('.comment-text').val(''); 
+                }
+                $('.save-comment').removeClass('disabled').text('Submit')
+
+            }
+        });
+           
+      })   
+
+    })
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 {% endblock %}
 
 {% endblock %}
