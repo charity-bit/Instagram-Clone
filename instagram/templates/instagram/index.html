@@ -76,20 +76,24 @@
   <script src="{% static 'instagram/js/index.js'%}"></script>
    <script>
      var div =  document.querySelector('.div-likes')
-     $(document).ready(function(){
-      $('#like-button').on('click',function(){ 
+     var likebtns = document.querySelectorAll('.like')
+
+     likebtns.forEach(function(btn){
+      $(document).ready(function(){
+      $(btn).on('click',function(e){ 
+        console.log(e)
         $.ajax({
             url:'/add-like/',
             type:'post',
             data:{
-               post:$('#like-button').val(),
+               post:$(btn).val(),
                csrfmiddlewaretoken:"{{csrf_token}}",
                action:'post'
             },
             dataType:'json',
             success:function(json){
                     result = json['result']
-                    div.innerHTML = result
+                    btn.parentElement.parentElement.nextElementSibling.firstElementChild.innerHTML = result
                     console.log(json['result'])
                 
             },
@@ -100,6 +104,8 @@
       })   
 
     })
+ 
+     })
    </script>
 
 
