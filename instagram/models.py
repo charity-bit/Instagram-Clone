@@ -97,13 +97,7 @@ class Post(models.Model):
     def delete_post(self):
         self.delete()
 
-    @classmethod
-    def search_post(cls,query):
-        '''
-        method to return searched posts
-        '''
-        posts = cls.objects.filter(name__icontains__ = query)
-        return posts
+ 
 
     @classmethod
     def get_post_by_id(cls,id):

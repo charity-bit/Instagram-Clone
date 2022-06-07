@@ -196,6 +196,21 @@ class UpdateProfile(UpdateView):
         return super(UpdateProfile,self).form_valid(form)
 
 
+def search_user(request):
+    if 'username' in request.GET and request.GET['username']:
+        query = request.GET.get('username')
+        res= User.objects.filter(username__icontains=query)
+
+        context = {
+            'users':res
+        }
+
+        return render(request,'instagram/search.html',context)
+    
+    else:
+        message = 'you have not searches for anything'
+        return render(request,'gallery/search.html',{'message':message})
+
 
     
 

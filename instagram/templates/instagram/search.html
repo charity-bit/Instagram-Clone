@@ -1,0 +1,26 @@
+{% extends 'instagram/base.html' %}
+{% load static %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'instagram/css/search.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<main>
+  
+    
+{% for user in users %}
+    
+            <h1>{{user.username}}</h1>
+{% endfor %}
+</main>
+
+
+{% block scripts %}
+
+{% endblock %}
+
+{% endblock %}

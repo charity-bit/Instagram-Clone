@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Jun  7 14:11:37 2022
+# Make data base, printed on Tue Jun  7 17:49:03 2022
 
 # Variables
 
@@ -25,7 +23,7 @@ SNAP_INSTANCE_KEY =
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-96495289-372e-4edb-ac1f-491e1cfe7bb2.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-40eafad5-40ae-4b75-b109-2e58becb1caf.sock
 # environment
 LC_NAME = sw_KE
 # environment
@@ -109,7 +107,7 @@ SNAP_REEXEC =
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2012
+VSCODE_PID = 2521
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -117,7 +115,7 @@ XDG_SESSION_TYPE = x11
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # environment
-SESSION_MANAGER = local/hp-HP-EliteBook-x360-1030-G2:@/tmp/.ICE-unix/1261,unix/hp-HP-EliteBook-x360-1030-G2:/tmp/.ICE-unix/1261
+SESSION_MANAGER = local/hp-HP-EliteBook-x360-1030-G2:@/tmp/.ICE-unix/1263,unix/hp-HP-EliteBook-x360-1030-G2:/tmp/.ICE-unix/1263
 # automatic
 *F = $(notdir $*)
 # environment
@@ -163,7 +161,7 @@ LC_TIME = sw_KE
 # environment
 SNAP = /snap/code/97
 # environment
-INVOCATION_ID = 26103bafa04c4dbe98bf1a6ed73995fd
+INVOCATION_ID = f17728ce9b75402fbe27237fedae44f6
 # environment
 SNAP_REVISION = 97
 # environment
@@ -199,7 +197,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := serve
 # environment
-SYSTEMD_EXEC_PID = 1280
+SYSTEMD_EXEC_PID = 1868
 # environment
 DISPLAY = :0
 # environment
@@ -215,11 +213,11 @@ SNAP_DATA = /var/snap/code/97
 # environment
 SNAP_CONTEXT = obY4oXPuGe0B8ERILtAahiFUYtiBntHqt_DhMVMc8gTjpzcAIR1j
 # environment
-MANAGERPID = 984
+MANAGERPID = 985
 # environment
 LC_MEASUREMENT = sw_KE
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 1915
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2373
 # environment
 _ = /snap/code/97/usr/share/code/code
 # environment
@@ -233,7 +231,7 @@ GDK_PIXBUF_MODULE_FILE = /home/hp/snap/code/common/.cache/gdk-pixbuf-loaders.cac
 # environment
 NVM_CD_FLAGS = 
 # environment
-JOURNAL_STREAM = 8:29651
+JOURNAL_STREAM = 8:31496
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -279,6 +277,9 @@ LC_IDENTIFICATION = sw_KE
 # environment
 SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
 # variable set hash-table stats:
+ 
+make: *** No rule to make target 'all'.  Stop.
+
 # Load=133/1024=13%, Rehash=0, Collisions=5/163=3%
 
 # Pattern-specific Variable Values
@@ -293,7 +294,6 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Implicit Rules
 
- 
 # No implicit rules.
 
 # Files
@@ -374,6 +374,6 @@ serve:
 # strcache performance: lookups = 35 / hit rate = 28%
 # hash-table stats:
 # Load=25/8192=0%, Rehash=0, Collisions=0/35=0%
-# Finished Make data base on Tue Jun  7 14:11:37 2022
+# Finished Make data base on Tue Jun  7 17:49:03 2022
 
  

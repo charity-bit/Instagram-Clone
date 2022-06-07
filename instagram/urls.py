@@ -22,5 +22,6 @@ urlpatterns = [
     # posts
     path('post/',AddpostView.as_view(),name='post'),
     path('timeline/',views.home,name='home'),
+    path('search/',views.search_user,name='search')
 
 ]
