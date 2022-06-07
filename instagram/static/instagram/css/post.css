@@ -1,0 +1,29 @@
+body{
+    background-color: #fafafa;
+}
+.cont{
+    width: 60%;
+    margin:5% auto;
+}
+
+.cont form{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 0px 1px 1px rgba(0,0,0,0.24);
+-webkit-box-shadow: 3px -6px 11px 1px rgba(0,0,0,0.24);
+-moz-box-shadow: 3px -6px 11px 1px rgba(0,0,0,0.24);
+background-color: #fff;
+}
+
+input[type='submit'],input[type='file']{
+    background-color:#0095f6 !important;
+    color: white;
+    font-weight: 600;
+    padding: 2% 2%;
+
+}
+input[type='submit']{
+    align-self: center;
+    width: 30%;
+    border-radius: 4px;
+}

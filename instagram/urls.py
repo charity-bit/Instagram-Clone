@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from django.contrib.auth.views import LogoutView
 
-from .views import CustomLoginView
+from .views import CustomLoginView,AddpostView
 
 urlpatterns = [
 
@@ -15,6 +15,8 @@ urlpatterns = [
     path('profile/<str:username>/',views.profile,name='profile'),
     path('add-comment/',views.save_comment,name='comment'),
     path('add-like/',views.like,name='like'),
+    path('follow/',views.follow,name='follow'),
+    path('post/',AddpostView.as_view(),name='post'),
 
     path('timeline/',views.home,name='home'),
 

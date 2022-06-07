@@ -195,8 +195,11 @@ main{
     display: none;
     align-items: center;
     justify-content: center;
-    
     animation: showlogout 1s ease 0s 1 normal forwards;
+}
+.s-followers span:nth-child(1){
+    font-weight: 600 !important;
+    font-size: 1.2vw;
 }
 
 .following-list{

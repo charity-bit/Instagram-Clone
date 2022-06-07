@@ -103,25 +103,14 @@ posts.forEach(function(post){
        details.style.display = 'flex';
        document.body.style.overflow = 'hidden';
    })
-   
- 
-    
-   
-})
 
-posts.forEach(function(post){
-    const details = post.lastElementChild;
-     btn.addEventListener('click',(e)=>{
-         console.log(e.target.nextSibling.parentElement.parentElement.style.display)
-         e.target.nextSibling.parentElement.parentElement.style.display = 'none'
-         console.log(e.target.nextSibling.parentElement.parentElement.style.display)
-         
-         
+   btn.addEventListener('click',(e)=>{
+       console.log(btn)
+    btn.parentElement.parentElement.style.display = 'none'
+    // post.display='flex'
+    
     })
-      
-    
- })
-
+})
 
 
 

@@ -15,10 +15,10 @@
 <div class="posts">
    {% for post in posts %}
     <div class="post">
-      <div class="top">
+      <a class="top" href="{% url 'profile' post.user %}">
         <img src="{{post.user.profile.profile_pic.url}}" alt="" class="profile-img">
          <p>{{post.user.username}}</p>
-      </div>
+      </a>
       <div class="separator"></div>
       <div class="img">
         <img src="{{post.image.url}}" alt="">
@@ -74,6 +74,15 @@
 
 {% block scripts %}
   <script src="{% static 'instagram/js/index.js'%}"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  
+  
+
+    <!-- like post -->
    <script>
      var div =  document.querySelector('.div-likes')
      var likebtns = document.querySelectorAll('.like')
@@ -110,8 +119,7 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script
+
 {% endblock %}
 
 {% endblock %}

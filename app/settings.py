@@ -16,6 +16,9 @@ import cloudinary
 import os
 
 import dotenv
+import cloudinary.api
+import cloudinary.uploader
+
 
 # dotenv_path = os.path.joint(os.path.dirname(__file__),'.env')
 
@@ -46,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'instagram.apps.InstagramConfig',
+    'cloudinary'
 
 ]
 

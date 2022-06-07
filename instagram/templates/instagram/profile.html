@@ -5,6 +5,8 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'instagram/css/profile.css' %}">
+
+
 {% endblock %}
 
 {% block content %}
@@ -33,17 +35,15 @@
     </div>
     
     {% else %}
-    {% if notfollowing %}
-        <a class="followbtn" id="{{username.id}}" bool="'true">Following</a>
-    {% else %}
-        {% if full_user in followers %}
-        <a class="followbtn" bool="false"
-        id="{{username.id}}">Follow back</a>
+        {% if notfollowing %}
+        <button class="followbtn" id="{{username.id}}" bool="true">Following</button>
         {% else %}
-        <a class="followbtn" bool="false"
-        id="{{username.id}}">Follow</a>
+        <button class="followbtn" id="{{username.id}}" bool="false">follow</button>
         {% endif %}
-    {% endif %}
+       
+        
+       
+  
     {% endif %}
 </div>
 <div class="followers">
@@ -56,10 +56,10 @@
       
      <!-- followers -->
      {% if followers.count == 1 %}
-     <p class="s-followers">{{followers.count}} <span>follower</span></p>
+     <p class="s-followers"><span>{{followers.count}}</span> <span>follower</span></p>
         
      {% else %}
-     <p class='s-followers'>{{followers.count}} <span>followers</span></p>
+     <p class='s-followers'> <span>{{followers.count}}</span> <span>followers</span></p>
      {% endif %}
 
      <!-- following -->
@@ -247,6 +247,13 @@
 
 {% block scripts %}
 <script src="{% static 'instagram/js/profile.js'%}"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- save comment -->
 <script>
     $(document).ready(function(){
       $('.save-comment').on('click',function(){
@@ -282,9 +289,57 @@
 
     })
 </script>
+<!-- follow -->
+<script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+$(document).ready(function(){
+      
+    $('.followbtn').on('click',function(e){
+        e.preventDefault()
+    var id  = $(this).attr('id')
+    var bool;
+    bool = $(this).attr('bool');
+    $.ajax({
+        type:'POST',
+        csrfmiddlewaretoken:"{{csrf_token}}",
+        url:'/follow/',
+        action:'post',
+        data:{
+            user_id:$(this).attr('id')
+        },
+        success:function(res){
+         if(bool == 'true'){
+             $('#'+id).text('Follow')
+             $('#'+id).attr('bool','false')
+
+         }
+         else if(bool == 'false'){
+            $('#'+id).text('Following')
+             $('#'+id).attr('bool','true')
+         }
+         document.querySelector('.s-followers').firstElementChild.innerHTML = res['result']
+         console.log(res)
+
+        }
+    })
+     }) 
+
+
+    })
+
+
+
+ </script>
 {% endblock %}
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+

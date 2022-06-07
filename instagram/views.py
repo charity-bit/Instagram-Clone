@@ -1,11 +1,12 @@
+from multiprocessing import context
 from re import template
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-
-
-
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
+from  django.views.generic import CreateView
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
 
 
 
@@ -13,8 +14,7 @@ from django.contrib.auth.views import LoginView
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-
-from .forms import RegistrationForm,CustomAuthForm
+from .forms import RegistrationForm,CustomAuthForm,PostForm
 
 
 
@@ -82,13 +82,11 @@ def profile(request,username):
     counted = None
     if not request.user.is_authenticated:
         return redirect('login')
-    try:
-        user = User.objects.get(username = username)
-        full_user = User.objects.filter(username = username).first()
+   
+    user = get_object_or_404(User,username = username)
+    full_user = User.objects.filter(username = username).first()
         
-    except User.DoesNotExist:
-        print('user not found')
-
+    
     count = len(Follow.objects.filter(account = user).exclude(follower = user))
     if count > 3:
         counted = count - 3
@@ -106,27 +104,38 @@ def profile(request,username):
     }  
     return render(request,'instagram/profile.html',context)
 
-
+@csrf_exempt
 def follow(request):
-    if request.method == 'GET':
-        account_id = request.GET.get('user_id')
-        account = User.objects.get(id=account_id)
+    if request.method == 'POST':
+        result = ''
+        user_id = int(request.POST.get('user_id'))
+        account = User.objects.get(pk=user_id)  
 
-        # chech exists
-        user = Follow.objects.filter(account=account,follower = request.user)
-
-        
-        if user.exists():
-            user.delete()
+        if Follow.objects.filter(account=account, follower=request.user).exists():
+            Follow.objects.filter(account=account, follower=request.user).delete()
+            result = account.followers.count()
         else:
-            follow_obj = Follow(account=account,follower = request.user)
-            follow_obj.save()
+            foll_obj = Follow(account=account, follower=request.user)  
+            foll_obj.save() 
+            result = account.followers.count()
 
-        return HttpResponse(account.followers.count())
+        return  JsonResponse({'result':result})
+        
+    
 
-    else:
-        return HttpResponse('Error!')
 
+
+@method_decorator(csrf_exempt,name='dispatch')
+class AddpostView(CreateView):
+    model = Post
+    template_name = 'instagram/post_form.html'
+    form_class = PostForm
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(AddpostView,self).form_valid(form)
+  
 
 
 def save_comment(request):
