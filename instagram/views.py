@@ -158,21 +158,24 @@ def save_comment(request):
 def like(request):
     if request.POST.get('action') == 'post':
         result = ''
+        data = 0
         id = int(request.POST.get('post'))
         post = get_object_or_404(Post,id=id)
 
         if post.like.filter(id = request.user.id).exists():
             post.like.remove(request.user)
             post.like_count -= 1
+            data = 0
             result = post.like_count
             post.save()
         else:
             post.like.add(request.user)
             post.like_count += 1
+            data = 1
             result = post.like_count
             post.save()
         # print(result)
-        return JsonResponse({'result':post.like.count()})
+        return JsonResponse({'result':post.like.count(),'data':data})
 
 
 class UpdateProfile(UpdateView):
