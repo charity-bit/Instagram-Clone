@@ -10,14 +10,23 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import csv
 from pathlib import Path
+from config import Config
 from dotenv import load_dotenv
+import django_heroku
 import cloudinary
+import phonenumber_field
+import phonenumbers
 import os
 
 import dotenv
 import cloudinary.api
 import cloudinary.uploader
+
+
+import dj_database_url
+from decouple import config,Csv
 
 
 # dotenv_path = os.path.joint(os.path.dirname(__file__),'.env')
@@ -32,11 +41,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-852uiw&rq)x_9uu=38s3xtiql73au7htv=x8u=8nrp@tiyn9ah'
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+MODE=config("MODE", default="dev")
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 
 # Application definition
@@ -49,7 +57,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'instagram.apps.InstagramConfig',
-    'cloudinary'
+    'cloudinary',
+    'django-phonenumber-field',
+    'django-phonenumbers',
+    'phonenumbers',
 
 ]
 
@@ -61,6 +72,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -87,25 +99,41 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'insta',
-        'USER': 'hp',
-        'PASSWORD':'qwertyip',
-    }
-}
-
 
 # cloudinary configurations
 
 cloudinary.config( 
-  cloud_name = 'dvhid4k2j', 
-  api_key = '538353386825468', 
-  api_secret = 'CtiIbnY_b2iv5HjDO4LKwTAZxN8'
+  cloud_name = Config('CD_NAME'), 
+  api_key = Config('CD_API_KEY'), 
+  api_secret = Config('CD_API_SECRET')
 )
 
 
+
+if config('MODE')=="dev":
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.postgresql_psycopg2',
+           'NAME': config('DB_NAME'),
+           'USER': config('DB_USER'),
+           'PASSWORD': config('DB_PASSWORD'),
+           'HOST': config('DB_HOST'),
+           'PORT': '',
+       }
+       
+   }
+# production
+else:
+   DATABASES = {
+       'default': dj_database_url.config(
+           default=config('DATABASE_URL')
+       )
+   }
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -138,10 +166,23 @@ USE_I18N = True
 USE_TZ = True
 
 
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+django_heroku.settings(locals())
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 LOGIN_REDIRECT_URL = 'timeline/'
 LOGIN_URL = '/'
 
