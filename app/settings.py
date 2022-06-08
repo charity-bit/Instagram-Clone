@@ -10,17 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-import csv
+
 from pathlib import Path
-from config import Config
+
 from dotenv import load_dotenv
 import django_heroku
 import cloudinary
-import phonenumber_field
-import phonenumbers
+
 import os
 
-import dotenv
 import cloudinary.api
 import cloudinary.uploader
 
@@ -58,9 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'instagram.apps.InstagramConfig',
     'cloudinary',
-    'django-phonenumber-field',
-    'django-phonenumbers',
-    'phonenumbers',
+
 
 ]
 
@@ -102,10 +98,13 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # cloudinary configurations
 
+
+
+
 cloudinary.config( 
-  cloud_name = Config('CD_NAME'), 
-  api_key = Config('CD_API_KEY'), 
-  api_secret = Config('CD_API_SECRET')
+  cloud_name = config('CD_NAME'), 
+  api_key = config('CD_API_KEY'), 
+  api_secret = config('CD_API_SECRET')
 )
 
 
