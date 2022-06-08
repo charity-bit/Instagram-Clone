@@ -374,7 +374,7 @@ main{
 }
 .post img{
     height:412px;
-    aspect-ratio: contain;
+    aspect-ratio: auto;
     width: 100%;  
   
 }
