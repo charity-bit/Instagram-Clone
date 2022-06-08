@@ -36,7 +36,8 @@ const closeFollowers = document.querySelector('.ex');
 
 
 
-showFollowers.addEventListener('click',()=>{
+showFollowers.addEventListener('click',(e)=>{
+    console.log(e)
     document.body.style.overflow = 'hidden';
     FollowersContainer.style.display = 'block';
 })
@@ -68,7 +69,8 @@ const closeFollowing = document.querySelector('.exx');
 
 
 
-showFollowing.addEventListener('click',()=>{
+showFollowing.addEventListener('click',(e)=>{
+    console.log(e)
     document.body.style.overflow = 'hidden';
     FollowingContainer.style.display = 'block';
 })

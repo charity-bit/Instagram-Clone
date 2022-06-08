@@ -11,6 +11,7 @@ from django.utils.decorators import method_decorator
 
 
 from django.contrib.auth.views import LoginView
+from django.views.generic.detail import DetailView
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -117,8 +118,8 @@ def follow(request):
         else:
             foll_obj = Follow(account=account, follower=request.user)  
             foll_obj.save()
-            if len(Follow.objects.filter(account=account, follower=request.user)) == 2:
-                Follow.objects.filter(account=account, follower=request.user).first().delete()
+            # if len(Follow.objects.filter(account=account, follower=request.user)) == 2:
+            #     Follow.objects.filter(account=account, follower=request.user).first().delete()
 
             
 
@@ -144,7 +145,7 @@ class AddpostView(CreateView):
 def save_comment(request):
     if request.method == 'POST':
         comment = request.POST['comment']
-        post = request.POST['post']
+        post = request.POST.get('post_id')
 
         post_ins = Post.objects.filter(id = post).first()
         user_ins = request.user
@@ -197,16 +198,34 @@ class UpdateProfile(UpdateView):
 
 
 def search_user(request):
+    full_user = None
+    counted = None
     if 'username' in request.GET and request.GET['username']:
         query = request.GET.get('username')
-        res= User.objects.filter(username__icontains=query)
+        user = User.objects.filter(username__icontains=query).first()
+        if user:
+            full_user = User.objects.filter(username = user.username).first()
+            count = len(Follow.objects.filter(account = user).exclude(follower = user))
+            if count > 3:
+                counted = count - 3
+        # elif user is None:
+        #     return HttpResponse('no such user')
+        
+        
+
+
 
         context = {
-            'users':res
+        'posts': Post.objects.filter(user = user).order_by('-date_posted'),
+        'followers': Follow.objects.filter(account = user).exclude(follower = user), #get followers excluding the current user/ own account
+        'following': Follow.objects.filter(follower = user).exclude(account = user),
+        'notfollowing': Follow.objects.filter(follower = request.user,account = user),
+        'username':user,
+        'full_user':full_user,
+        'counted':counted
         }
 
-        return render(request,'instagram/search.html',context)
-    
+        return render(request,'instagram/search.html',context)    
     else:
         message = 'you have not searches for anything'
         return render(request,'gallery/search.html',{'message':message})
@@ -214,6 +233,7 @@ def search_user(request):
 
     
 
-
-
-
+class PostDetail(DetailView):
+    model = Post
+    context_object_name = 'post'
+    template_name ='instagram/details.html'

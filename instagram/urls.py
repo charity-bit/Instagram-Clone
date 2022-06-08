@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from django.contrib.auth.views import LogoutView
 
-from .views import CustomLoginView,AddpostView,UpdateProfile
+from .views import CustomLoginView,AddpostView,UpdateProfile,PostDetail
 
 urlpatterns = [
 
@@ -21,6 +21,7 @@ urlpatterns = [
 
     # posts
     path('post/',AddpostView.as_view(),name='post'),
+    path('post/<int:pk>/',PostDetail.as_view(),name='details'),
     path('timeline/',views.home,name='home'),
     path('search/',views.search_user,name='search')
 

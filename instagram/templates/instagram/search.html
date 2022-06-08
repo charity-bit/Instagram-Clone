@@ -1,26 +1,379 @@
 {% extends 'instagram/base.html' %}
+
 {% load static %}
 
 
+
 {% block styles %}
-<link rel="stylesheet" href="{% static 'instagram/css/search.css' %}">
+<link rel="stylesheet" href="{% static 'instagram/css/profile.css' %}">
+
+
 {% endblock %}
 
 {% block content %}
 
 
+
 <main>
-  
+<!-- profile details -->
+
+{% if username %}
+<div class="left">
+    {% if full_user.profile.profile_pic.url %}
+    <img src="{{username.profile.profile_pic.url}}" alt="" class="profile-img">
+    {% else%}
+    <p><a href="#"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M11 6a3 3 0 1 1-6 0a3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></g></svg></a></p>
+    {% endif %}
+</div>
+
+<div class="right">
+<div class="top">
+    <p>{{username}}</p>
+    {% if request.user == username %}
+     <a class="edit-p"
+     href="{% url 'update-profile' username.profile.id %}">Edit Profile</a>
+    <p id="cog"><a class="cog"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36"><path fill="currentColor" d="m32.57 15.72l-3.35-1a11.65 11.65 0 0 0-.95-2.33l1.64-3.07a.61.61 0 0 0-.11-.72l-2.39-2.4a.61.61 0 0 0-.72-.11l-3.05 1.63a11.62 11.62 0 0 0-2.36-1l-1-3.31a.61.61 0 0 0-.59-.41h-3.38a.61.61 0 0 0-.58.43l-1 3.3a11.63 11.63 0 0 0-2.38 1l-3-1.62a.61.61 0 0 0-.72.11L6.2 8.59a.61.61 0 0 0-.11.72l1.62 3a11.63 11.63 0 0 0-1 2.37l-3.31 1a.61.61 0 0 0-.43.58v3.38a.61.61 0 0 0 .43.58l3.33 1a11.62 11.62 0 0 0 1 2.33l-1.64 3.14a.61.61 0 0 0 .11.72l2.39 2.39a.61.61 0 0 0 .72.11l3.09-1.65a11.65 11.65 0 0 0 2.3.94l1 3.37a.61.61 0 0 0 .58.43h3.38a.61.61 0 0 0 .58-.43l1-3.38a11.63 11.63 0 0 0 2.28-.94l3.11 1.66a.61.61 0 0 0 .72-.11l2.39-2.39a.61.61 0 0 0 .11-.72l-1.66-3.1a11.63 11.63 0 0 0 .95-2.29l3.37-1a.61.61 0 0 0 .43-.58v-3.41a.61.61 0 0 0-.37-.59ZM18 23.5a5.5 5.5 0 1 1 5.5-5.5a5.5 5.5 0 0 1-5.5 5.5Z" class="clr-i-solid clr-i-solid-path-1"/><path fill="none" d="M0 0h36v36H0z"/></svg></a></p>
+    <div class="logout" id="log">
+        <div class="cancel">
+            <a href="{% url 'logout' %}" id="logout">Log out</a>
+            <a href="#" id="cancel" >Cancel</a>
+              
+        </div>
+    </div>
     
-{% for user in users %}
+    {% else %}
+    <!-- follow buttons -->
+        {% if notfollowing %}
+        <button class="followbtn" id="{{username.id}}" bool="true">Following</button>
+        {% else %}
+        <button class="followbtn" id="{{username.id}}" bool="false">follow</button>
+        {% endif %}
+        <!-- end of follow buttons -->
     
-            <h1>{{user.username}}</h1>
-{% endfor %}
+    {% endif %}
+</div>
+<div class="followers">
+     {% if posts.count == 1 %}
+     <p>{{posts.count}} <span>post</span></p>
+     {% else %}
+     <p>{{posts.count}} <span>posts</span></p>
+
+     {% endif %}
+      
+     <!-- followers -->
+     {% if followers.count == 1 %}
+     <p class="s-followers"><span>{{followers.count}}</span> <span>follower</span></p>
+        
+     {% else %}
+     <p class='s-followers'> <span>{{followers.count}}</span> <span>followers</span></p>
+     {% endif %}
+
+     <!-- following -->
+
+     <p class="s-following">{{following.count}} <span>following</span></p>
+
+
+     <!-- followers list -->
+     {% if followers %}
+     <div class="followers-cont">
+        <div class="followers-list">
+            <p><a href="#">Followers <span class="ex">X</span></a></p>
+            <div class="hor"></div>
+            <ul> 
+                
+                {% for follower in followers %}
+                <li>
+                    <a href="{% url 'profile' follower %}">
+                        {% if follower.profile.profile_pic.url %}
+                         <img src="{{follower.user.profile.profile_pic.url}}" alt="">
+                         {% else %}
+                         <p><a href="{% url 'profile' follower %}"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M11 6a3 3 0 1 1-6 0a3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></g></svg></a></p>
+                         {% endif %}
+                         <p>{{follower}}</p>
+                        </a></li>
+                         
+                {% endfor %}
+            </ul>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- end followers list -->
+
+
+
+      <!-- following list -->
+
+      {% if following %}
+      <div class="following-cont">
+         <div class="following-list">
+             <p><a href="#">Following <span class="exx">X</span></a></p>
+             <div class="horr"></div>
+             <ul> 
+                 
+                 {% for follower in following %}
+                 <li>
+                     <a href="{% url 'profile' follower.account %}">
+                         {% if follower.profile.profile_pic.url %}
+                          <img src="{{follower.user.profile.profile_pic.url}}" alt="">
+                          {% else %}
+                          <p><a href="{% url 'profile' follower.account %}"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M11 6a3 3 0 1 1-6 0a3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></g></svg></a></p>
+                          {% endif %}
+                          <p>{{follower.account}}</p></a></li>
+                          
+                 {% endfor %}
+             </ul>
+         </div>
+       </div>
+       {% endif %}
+
+
+      <!-- end following list -->
+
+
+</div>
+
+
+<!-- bio -->
+
+<div class="bio">
+    <p>
+        {{full_user.profile.bio}}
+    </p>
+
+    {% if followers %}
+     {% if followers|length > 3%}
+      
+     <p class="l-followers">followed by
+          <a href="#">{{followers.0}}</a>,<a href="#">{{followers.1}}</a>.<a href="#">{{followers.2}}</a> and {{counted}} others</p>
+      {% elif followers|length == 3  %}
+       <p class="l-followers"> followed by 
+        <a href="#">{{followers.0}}</a>,<a href="#">{{followers.1}}</a> and <a href="#">{{followers.2}}</a></p>
+       </p> 
+       {% elif followers|length == 2%}
+       <p class="l-followers"> followed by 
+        <a href="#">{{followers.0}}</a> and <a href="#">{{followers.1}}</a></p>
+       </p> 
+       {% else %}
+       <p class="l-followers"> followed by 
+        <a href="#">{{followers.0}}</a></p>
+       </p> 
+
+
+     {% endif %}
+
+     {% else %}
+
+     <p class="l-followers"> No followers yet</p>
+
+     {% endif %}
+</div>
+</div>
+
+
+
+
+<!-- horizontal separator -->
 </main>
+<div class="hr"></div>
+<p class="posts-ttl"><a href="#" ><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M16 16h4v4h-4v-4Zm-6 0h4v4h-4v-4Zm-6 0h4v4H4v-4Zm12-6h4v4h-4v-4Zm-6 0h4v4h-4v-4Zm-6 0h4v4H4v-4Zm12-6h4v4h-4V4Zm-6 0h4v4h-4V4ZM4 4h4v4H4V4Z"/></svg>posts</a></p>
+ <div class="posts">
+     {% if posts %}
+        
+     {% for post in posts %}
+     
+            <div class="post">
+            <img src="{{post.image.url}}" alt="{{post.post_caption}}" class="img">
+            <div class="comments-div">
+             <p><a href="#"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M4.25 17.31a.75.75 0 0 1-.72-1l1.25-4.12a6.64 6.64 0 0 1-.4-2.19a6.36 6.36 0 0 1 .51-2.51a6.48 6.48 0 0 1 10.53-2.1a6.66 6.66 0 0 1 1.38 2.06a6.46 6.46 0 0 1 0 5a6.66 6.66 0 0 1-1.38 2.06A6.48 6.48 0 0 1 8.59 16l-4.12 1.28a.83.83 0 0 1-.22.03ZM10.84 5a4.9 4.9 0 0 0-1.93.39A5 5 0 0 0 6.27 8a5 5 0 0 0 0 3.87a.75.75 0 0 1 0 .51l-.92 3l3-.92a.75.75 0 0 1 .51 0a5 5 0 0 0 6.51-2.64A5 5 0 0 0 10.84 5Z"/><path fill="currentColor" d="M19.75 20.5a.83.83 0 0 1-.22 0l-4.12-1.25a6.42 6.42 0 0 1-8.17-3.48a.73.73 0 0 1 .38-1a.75.75 0 0 1 1 .38a5.06 5.06 0 0 0 1 1.53a5 5 0 0 0 5.44 1.06a.75.75 0 0 1 .51 0l3 .92l-.92-3a.75.75 0 0 1 0-.51a4.9 4.9 0 0 0 .39-1.93a4.93 4.93 0 0 0-1.45-3.51a5.62 5.62 0 0 0-.67-.71a.75.75 0 1 1 .84-1.24a6.69 6.69 0 0 1 1 .79a6.49 6.49 0 0 1 1.38 2.06a6.38 6.38 0 0 1 .51 2.52a6.63 6.63 0 0 1-.4 2.25l1.25 4.12a.75.75 0 0 1-.72 1Z"/></svg> <span>0</span></a></p>
+             <p><a href="#"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8a264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39c-10 6.1-19.5 12.8-28.5 20.1c-9-7.3-18.5-14-28.5-20.1c-41.8-25.5-89.9-39-139.2-39c-35.5 0-69.9 6.8-102.4 20.3c-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9c0 33.3 6.8 68 20.3 103.3c11.3 29.5 27.5 60.1 48.2 91c32.8 48.9 77.9 99.9 133.9 151.6c92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3c56-51.7 101.1-102.7 133.9-151.6c20.7-30.9 37-61.5 48.2-91c13.5-35.3 20.3-70 20.3-103.3c.1-35.3-7-69.6-20.9-101.9z"/></svg> <span>{{post.like.count}}</span></a></p>
+            </div>
+
+            <div class="post-details">
+                <div class="close-btn">
+                    <a class="close-b">
+                      X
+                    </a>
+                </div>
+                <div class="detail">
+                    {% if posts|length > 3%}
+                    <div>
+                           <img src="{{post.image.url}}" alt="">
+                    </div>
+                    {% else %}
+                    <div class="img3">
+                        <img src="{{post.image.url}}" alt="">
+                 </div>
+                    {% endif %}
+                    <div class="comments-section">
+                        <div class="author">
+                            <a href="{% url 'profile' post.user %}"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="none" d="M8.007 24.93A4.996 4.996 0 0 1 13 20h6a4.996 4.996 0 0 1 4.993 4.93a11.94 11.94 0 0 1-15.986 0ZM20.5 12.5A4.5 4.5 0 1 1 16 8a4.5 4.5 0 0 1 4.5 4.5Z"/><path fill="currentColor" d="M26.749 24.93A13.99 13.99 0 1 0 2 16a13.899 13.899 0 0 0 3.251 8.93l-.02.017c.07.084.15.156.222.239c.09.103.187.2.28.3c.28.304.568.596.87.87c.092.084.187.162.28.242c.32.276.649.538.99.782c.044.03.084.069.128.1v-.012a13.901 13.901 0 0 0 16 0v.012c.044-.031.083-.07.128-.1c.34-.245.67-.506.99-.782c.093-.08.188-.159.28-.242c.302-.275.59-.566.87-.87c.093-.1.189-.197.28-.3c.071-.083.152-.155.222-.24ZM16 8a4.5 4.5 0 1 1-4.5 4.5A4.5 4.5 0 0 1 16 8ZM8.007 24.93A4.996 4.996 0 0 1 13 20h6a4.996 4.996 0 0 1 4.993 4.93a11.94 11.94 0 0 1-15.986 0Z"/></svg></a>
+                             <div>
+                                <p><a href="{% url 'profile' post.user %}">{{post.user}}</a></p>
+                                <span class="cap">{{post.post_caption}}</span>
+                             </div>
+                           
+                             
+                            
+                        </div>
+                        <div class="separator"></div>
+                        <div class="comments">
+                            
+                        {% for comment in post.comments.all %}
+                            <div class="comment">
+                                <p> <a class="user"
+                                    href="{% url 'profile' post.user %}"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="none" d="M8.007 24.93A4.996 4.996 0 0 1 13 20h6a4.996 4.996 0 0 1 4.993 4.93a11.94 11.94 0 0 1-15.986 0ZM20.5 12.5A4.5 4.5 0 1 1 16 8a4.5 4.5 0 0 1 4.5 4.5Z"/><path fill="currentColor" d="M26.749 24.93A13.99 13.99 0 1 0 2 16a13.899 13.899 0 0 0 3.251 8.93l-.02.017c.07.084.15.156.222.239c.09.103.187.2.28.3c.28.304.568.596.87.87c.092.084.187.162.28.242c.32.276.649.538.99.782c.044.03.084.069.128.1v-.012a13.901 13.901 0 0 0 16 0v.012c.044-.031.083-.07.128-.1c.34-.245.67-.506.99-.782c.093-.08.188-.159.28-.242c.302-.275.59-.566.87-.87c.093-.1.189-.197.28-.3c.071-.083.152-.155.222-.24ZM16 8a4.5 4.5 0 1 1-4.5 4.5A4.5 4.5 0 0 1 16 8ZM8.007 24.93A4.996 4.996 0 0 1 13 20h6a4.996 4.996 0 0 1 4.993 4.93a11.94 11.94 0 0 1-15.986 0Z"/></svg>{{comment.user}}</a>
+                                   </p>
+                                 <div class="content">
+                                        <p>{{comment.comment}}</p>
+                                        
+                                 </div>
+                               
+                                
+                            
+                               
+                            </div>
+                            
+                            
+                        {% endfor %}
+                        </div>
+                        <div class="separator"></div>
+                        <div class="post-comment">
+                            
+                            <textarea class="comment-text" placeholder="add comment ..."></textarea>
+                            <button class="save-comment" 
+                            data-user="{{request.user}}" data-post="{{post}}">Submit</button>
+                        </div>
+                       
+                      
+
+                    </div>
+                   
+                </div>
+            </div>
+
+
+
+           </div>
+    
+        {% csrf_token %}
+     {% endfor %}
+     {% endif %}
+ </div>
+
+ {% else %}
+
+<p>No such user </p>
+
+{% endif %}
+
 
 
 {% block scripts %}
+<script src="{% static 'instagram/js/profile.js'%}"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- save comment -->
+<script>
+    $(document).ready(function(){
+        var comments = document.querySelector('.comments');
+      $('.save-comment').on('click',function(){
+           var _comment = $('.comment-text').val()
+           var _user = $(this).data('user');
+           var post = $(this).data('post');
+
+        //    ajax
+
+        $.ajax({
+            url:'/add-comment/',
+            type:'post',
+            action:'post',
+            data:{
+               comment:_comment,
+               post:post,
+               csrfmiddlewaretoken:"{{csrf_token}}"
+            },
+            dataType:'json',
+            beforeSend:function(){
+                $('.save-comment').addClass('disabled').text('saving ... ')
+            },
+            success:function(res){
+                console.log(res)
+                if(res.bool == true){
+                    $('.comment-text').val(''); 
+                       var _html = '<p>'+_comment+'</p>';
+                                        comments.append(_html) 
+                }
+                $('.save-comment').removeClass('disabled').text('Submit')
+
+            }
+        });
+           
+      })   
+
+    })
+</script>
+
+
+
+<!-- follow -->
+<script>
+
+$(document).ready(function(){
+      var btn = document.querySelector('.followbtn')
+    $(btn).on('click',function(){
+       
+    var id  = $(this).attr('id')
+    var bool;
+    bool = $(this).attr('bool');
+    $.ajax({
+        type:'POST',
+        csrfmiddlewaretoken:"{{csrf_token}}",
+        url:'/follow/',
+        data:{
+            user_id:$(this).attr('id')
+        },
+        success:function(res){
+         if(bool == 'true'){
+             $('#'+id).text('Follow')
+             $('#'+id).attr('bool','false')
+
+         }
+         else if(bool == 'false'){
+            $('#'+id).text('Following')
+             $('#'+id).attr('bool','true')
+         }
+         document.querySelector('.s-followers').firstElementChild.innerText = res
+         console.log(res)
+
+        }
+    })
+     }) 
+
+
+    })
+
+
+
+ </script>
+
+
+
 
 {% endblock %}
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+

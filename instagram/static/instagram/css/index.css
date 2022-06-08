@@ -14,7 +14,7 @@ body{
 }
 
 .posts{
-    width: 45%;
+    width: 40%;
     margin: 5% auto;
     display: flex;
     flex-direction: column;
@@ -92,11 +92,20 @@ body{
     margin: 2% 5%;
 }
 
-.view-all{
+.view-all a{
     padding: 1% 5%;
     color:#a8a8a8;
     font-weight: 600;
     font-size: 1vw;
+    text-decoration: none; 
 }
 
 
+
+@media screen and (max-width:500px) {
+    .posts{
+        width: 80%;
+        margin: 5% auto;
+
+    }
+}

@@ -1,0 +1,130 @@
+
+.detail{
+    width: 90%;
+    height: 80%;
+    background-color: white;
+    position: absolute;
+    display: flex; 
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition:all .2s ease-in-out;
+    border-radius: 20px;
+}
+
+.img3{
+    width: 45%;
+    height: 100%;
+    margin: auto 0;
+}
+.img3 img{
+    width: 100%;
+    height: 100%;
+    margin:auto 0;
+} 
+.comments-section{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.comments{
+    height: 100%;
+}
+.close-btn{
+    position: absolute;
+    right:3%;
+    top:3%;
+    color: #fff;
+    font-size: 2.5vw;
+}
+
+.author{
+    display: flex;
+    margin: 2% 3%;
+    gap:10px;
+    padding: 0 5%;
+    align-items: center;
+}
+
+.author a{
+    color:#000;
+    text-decoration: black;
+    font-weight: 600;
+    font-size: 1.5vw;
+    display: flex;
+    align-items: center;
+}
+.author svg,.comment svg{
+    color: #dbdbdb ;
+    font-size: 2vw;
+}
+.separator{
+    background-color: #dbdbdb ;
+    width: 132%;
+    height: 1px;
+}
+
+.comments{
+overflow-y: scroll;
+margin-left: 10%;
+}
+.comments::-webkit-scrollbar {
+    display: none;
+  }
+.comment{
+    padding: 2% 5%;
+    margin: 2% 3%;
+}
+
+.user
+{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.1vw;
+    color: #111;
+    font-weight: 600;
+    gap: 10px;
+}
+
+.content{
+    color: #a8a8a8;
+    font-size: .9vw;
+    margin: 1% 13%;
+   
+}
+
+.post-comment{
+    padding: 5% 0;
+    display: flex;
+    justify-content: center;
+    gap:10px;
+}
+.save-comment{
+    border: none;
+    color: #0095f6;
+    font-weight: 600;
+    background-color: transparent;
+
+}
+textarea{
+    border: 1px solid #0095f6;
+    padding: 2% 5%;
+    border-radius: 5px;
+}
+.cap{
+    display: block !important;
+    font-size: 1vw;
+    margin-top: 2%;
+    color: #000;
+    font-weight: 400;
+}
+
+.profile-img{
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    aspect-ratio: contain;
+}
+

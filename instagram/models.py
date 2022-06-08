@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
@@ -10,7 +11,7 @@ class Profile(models.Model):
     class profile for a user's personal profile
     '''
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    profile_pic = CloudinaryField('profile_image',blank=True)
+    profile_pic = CloudinaryField('profile_image',default='https://res.cloudinary.com/dvhid4k2j/image/upload/v1654654901/png_rxb8cy.jpg')
     followings = models.ManyToManyField(User,related_name='ings',blank=True)
     followers = models.ManyToManyField(User,related_name='owers',blank=True)
     name = models.CharField(max_length=50,blank=True)
