@@ -14,10 +14,11 @@ body{
 }
 
 .posts{
-    width: 40%;
+    width: 80%;
     margin: 5% auto;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
     gap: 20px;
 }
 .top{
@@ -37,6 +38,7 @@ body{
 .img{
     width: 100%;
     padding: 0;
+    
 }
 .img img{
     height: 500px;
@@ -46,6 +48,8 @@ body{
 .post{
     border: 1px solid #dbdbdb;
     border-radius: 5px;
+    width: 30%;
+    margin: 0 auto
 }
 
 .bottom{
@@ -104,10 +108,23 @@ body{
 
 
 
-@media screen and (max-width:500px) {
+/* @media screen and (max-width:500px) {
+    .post{
+        width: 30%;
+    margin: 0 auto;
+    }
+    
+} */
+
+
+/* @media screen and (min-width:800px) {
     .posts{
-        width: 80%;
+        width: 80% !important;
         margin: 5% auto;
 
     }
-}
+
+    .post{
+       ;
+    }
+} */

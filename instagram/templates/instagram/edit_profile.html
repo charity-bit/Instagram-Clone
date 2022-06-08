@@ -10,17 +10,16 @@
 
 
 <main>
-
-  <div class="left">
-
+  
+ <div class="right">
+  <div class="user">
+    <img src="{{request.user.profile.profile_pic.url}}" alt="">
+     <p>{{request.user}}</p>
   </div>
-  <div class="separator"></div>
-  <div class="right">
-
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {{form}}
-      <input type="submit" value="submit">
+      <input type="submit" value="submit" id="id_submit">
   </form>
 
   </div>

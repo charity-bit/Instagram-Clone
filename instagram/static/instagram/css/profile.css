@@ -391,7 +391,7 @@ main{
     height: 10vw;
     width: 10vw;
     border-radius: 50%;
-    aspect-ratio: contain;
+    aspect-ratio: 1/1;
     margin-left: 50%;
 }
 @keyframes showlogout {

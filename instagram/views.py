@@ -119,9 +119,6 @@ def follow(request):
             foll_obj.save()
             # if len(Follow.objects.filter(account=account, follower=request.user)) == 2:
             #     Follow.objects.filter(account=account, follower=request.user).first().delete()
-
-            
-
         return  HttpResponse(account.followers.count())
         
     

@@ -126,7 +126,10 @@ background-color:#b1dffc ;
     text-decoration: none;
     color:#0095f7
 }
-
+ul{
+    list-style: none;
+    font-size: 1vw;
+}
 
 
 @media screen and (min-width:300px) and (max-width:500px) {
@@ -156,15 +159,26 @@ background-color:#b1dffc ;
   
     .forgotp{
         font-size: 2vw;
+        text-decoration: none !important;
+    }
+    .forgotp:hover{
+        text-decoration: underline;
     }
     .sub p{
+        font-size: 2vw;
+    }
+    ul{
+        list-style: none;
         font-size: 2vw;
     }
     
 }
 
 @media screen and (min-width:501px) and (max-width:720px) {
-
+    ul{
+        list-style: none;
+        font-size: 2vw;
+    }
     .cont{
         width: 50%;
         margin-top: 10%;
