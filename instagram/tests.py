@@ -50,7 +50,7 @@ class ProfileTestClass(TestCase):
         self.new_user.save()
 
         # profile instance
-        self.new_profile = Profile(user = self.new_user, name = 'charity Nyanchera',bio = "Don't blame meLove made me Crazy, if it doesn,t you aint doing right")
+        self.new_profile = Profile(user = self.new_user, name = 'charity Nyanchera',bio = "Don't blame me Love made me Crazy, if it doesn,t you aint doing right")
 
 
     
