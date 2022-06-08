@@ -66,22 +66,9 @@ height: 100%;
     margin: 2% 3%;
 }
 
-.user
-{
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    font-size: 1.1vw;
-    color: #111;
-    font-weight: 600;
-    gap: 10px;
-}
-
 .content{
     color: #a8a8a8;
     font-size: .9vw;
-    margin: 1% 13%;
-   
 }
 
 .post-comment{
@@ -173,9 +160,7 @@ textarea{
     }
     .content{
         color: #a8a8a8;
-        font-size: 2vw;
-        margin: 0 18%;
-       
+        font-size: 2vw;       
     }
     .cap{
         font-size: 2vw;
@@ -253,8 +238,6 @@ textarea{
     .content{
         color: #a8a8a8;
         font-size: 1.5vw;
-        margin: 0 18%;
-       
     }
     .cap{
         font-size: 1.5vw;
@@ -267,15 +250,4 @@ textarea{
         border-radius: 50%;
         aspect-ratio: contain;
     }
-    
-    
-
-
-
-
-
-
-
-
-
-} */
+} 

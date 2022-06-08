@@ -34,28 +34,15 @@
                 <div class="comments">
                     
                 {% for comment in post.comments.all %}
-                    <div class="comment">
-                        <p> <a class="user"
-                            href="{% url 'profile' post.user %}">
-                            {% if post.user.profile.profile_pic.url %}
-                            <img src="{{comment.user.profile.profile_pic.url}}" alt="" class="profile-img">
-
-                            {% else %}
-                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="none" d="M8.007 24.93A4.996 4.996 0 0 1 13 20h6a4.996 4.996 0 0 1 4.993 4.93a11.94 11.94 0 0 1-15.986 0ZM20.5 12.5A4.5 4.5 0 1 1 16 8a4.5 4.5 0 0 1 4.5 4.5Z"/><path fill="currentColor" d="M26.749 24.93A13.99 13.99 0 1 0 2 16a13.899 13.899 0 0 0 3.251 8.93l-.02.017c.07.084.15.156.222.239c.09.103.187.2.28.3c.28.304.568.596.87.87c.092.084.187.162.28.242c.32.276.649.538.99.782c.044.03.084.069.128.1v-.012a13.901 13.901 0 0 0 16 0v.012c.044-.031.083-.07.128-.1c.34-.245.67-.506.99-.782c.093-.08.188-.159.28-.242c.302-.275.59-.566.87-.87c.093-.1.189-.197.28-.3c.071-.083.152-.155.222-.24ZM16 8a4.5 4.5 0 1 1-4.5 4.5A4.5 4.5 0 0 1 16 8ZM8.007 24.93A4.996 4.996 0 0 1 13 20h6a4.996 4.996 0 0 1 4.993 4.93a11.94 11.94 0 0 1-15.986 0Z"/>
-                            </svg>{% endif %}
-                            {{comment.user}}
-                        </a>
-                           
-                        </p>
-                         <div class="content">
-                                <p>{{comment.comment}}</p>
-                                
-                         </div>
-                       
-                        
-                    
-                       
-                    </div>
+                <div class="author comment">
+                    <a href="{% url 'profile' comment.user %}">
+                        <img src="{{comment.user.profile.profile_pic.url}}" alt="" class="profile-img">
+                    </a>
+                     <div>
+                        <p><a href="{% url 'profile' comment.user %}">{{comment.user}}</a></p>
+                        <span class="content">{{comment.comment}}</span>
+                     </div>
+                </div>
                     
                     
                 {% endfor %}
@@ -116,15 +103,16 @@
             success:function(res){
                     $('.comment-text').val('');
                         var _html = document.createElement('div')
-                       _html.innerHTML = `<div class="comment">\
-                        <p> <a class="user"\
-                            href="/profile/${_user}">\
-                            <img src="${pic}" alt="" class="profile-img">
-                            ${_user}\
-                        </a>\
-                           </p>\
-                         <div class="content">\
-                                <p>${_comment}</p></div></div>`
+                       _html.innerHTML = `
+                       <div class="author comment">
+                    <a href="${url}">
+                        <img src="${pic}" alt="" class="profile-img">
+                    </a>
+                     <div>
+                        <p><a href="${url}">${_user}</a></p>
+                        <span class="content">${_comment}</span>
+                     </div>
+                </div>`
                                 comments.prepend(_html)
                                 $('.save-comment').addClass('disabled').text('submit')
      
