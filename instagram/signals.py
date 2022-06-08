@@ -10,6 +10,7 @@ user = User.objects.filter(username = 'charity').first()
 def create_profile(sender,instance,created ,**kwargs):
     if created:
         Profile.objects.create(user=instance)
+        # make new user follow admin in order to see posts in their timeline
         foll = Follow.objects.create(account = user ,follower= instance)
         foll.save()
 

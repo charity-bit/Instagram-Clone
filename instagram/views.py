@@ -27,8 +27,9 @@ from .models import Follow, Profile, User,Post,Comment
 # Create your views here.
 
 
+
 @method_decorator(csrf_exempt,name='dispatch')
-class CustomLoginView(LoginView):
+class CustomLoginView(LoginView):  #created custom loginView in order to use a different form class
     template_name = 'instagram/login.html'
     fields = '__all__'
     redirect_authenticated_user = True
@@ -86,7 +87,7 @@ def profile(request,username):
     if not request.user.is_authenticated:
         return redirect('login')
    
-    user = get_object_or_404(User,username = username)
+    user = get_object_or_404(User,username = username)  
     full_user = User.objects.filter(username = username).first()
         
     
@@ -167,7 +168,7 @@ def like(request):
     if request.POST.get('action') == 'post':
         result = ''
         data = 0
-        id = int(request.POST.get('post'))
+        id = int(request.POST.get('post')) # from profile.html ajax 
         post = get_object_or_404(Post,id=id)
 
         if post.like.filter(id = request.user.id).exists():
@@ -183,7 +184,7 @@ def like(request):
             result = post.like_count
             post.save()
         # print(result)
-        return JsonResponse({'result':post.like.count(),'data':data})
+        return JsonResponse({'result':post.like.count(),'data':data})  # results passed to success function ajax
 
 
 class UpdateProfile(LoginRequiredMixin,UpdateView):
@@ -192,7 +193,7 @@ class UpdateProfile(LoginRequiredMixin,UpdateView):
     template_name = 'instagram/edit_profile.html'
 
 
-
+    # to limit people from editing other people's profile
     def get_queryset(self):
         base_qs = super(UpdateProfile,self).get_queryset()  # return queryset of Profile model
         return base_qs.filter(user=self.request.user)   #filter where user = current_user
@@ -202,10 +203,12 @@ class UpdateProfile(LoginRequiredMixin,UpdateView):
             'username': self.request.user.username # on success edit return to profile page
         })
 
-
+    
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(UpdateProfile,self).form_valid(form)
+
+        
 
 @login_required(login_url='/')
 def search_user(request):
