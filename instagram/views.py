@@ -244,6 +244,14 @@ class PostList(ListView):
     context_object_name = 'posts'
     template_name = 'instagram/explore.html'
 
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = context['posts'].all().order_by('-date_posted')
+
+
+
+        return context 
+
 
     
 
