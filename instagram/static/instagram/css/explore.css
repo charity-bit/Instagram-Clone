@@ -1,0 +1,109 @@
+
+.posts{
+    width:70%;
+    display: flex;
+    flex-wrap: wrap;
+    margin:2% auto;
+    gap: 20px;
+}
+
+.post{
+    position: relative;
+    width: 30%;
+    
+}
+.comments-div{
+  position: absolute;
+  top:0;
+  left: 0;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  row-gap: 20px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition:all .2s ease-in-out;
+}
+.comments-div svg{
+    background-color: transparent !important;
+}
+
+.comments-div a{
+    text-decoration: none;
+    color: #fff;
+    background-color: transparent !important;
+}
+.comments{
+    overflow-y:scroll;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+}
+.post img{
+    height:412px;
+    aspect-ratio: contain;
+    width: 100%;  
+  
+}
+
+.post:hover :nth-child(2){ 
+    background-color: rgba(0, 0, 0, .4);
+    opacity:1;
+}
+
+.post p a span{
+    background-color: transparent;
+}
+.profile-img{
+    height: 10vw;
+    width: 10vw;
+    border-radius: 50%;
+    aspect-ratio: contain;
+    margin-left: 50%;
+}
+
+
+@media screen and (max-width:500px) {
+
+    .posts{
+        width:70%;
+        margin:2% auto;
+    
+    }
+    .post{
+        position: relative;
+        width: 100%;
+        
+    }
+}
+
+
+@media screen and (min-width:501px) and (max-width:800px){
+
+    .posts{
+        width:95%;
+        margin:2% auto;
+    
+    }
+    .post{
+        position: relative;
+        width: 45%;
+        
+    }
+}
+
+@media screen and (min-width:801px) and (max-width:1000px){
+
+    .posts{
+        width:90%;
+        margin:2% auto;
+    
+    }
+    .post{
+        position: relative;
+        width: 30%;    
+    }
+}

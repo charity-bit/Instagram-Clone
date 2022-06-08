@@ -4,16 +4,21 @@ body{
 .cont{
     width: 60%;
     margin:5% auto;
+    
 }
 
 .cont form{
     display: flex;
     flex-direction: column;
+    animation: bounceIn 1.5s ease 0s 1 normal forwards;
 }
 
 .ttl{
     background-color:#efefef;
     padding:2% 4%;
+    color:#0095f6;
+    font-weight: 600;
+    animation: bounceIn 1.5s ease 0s 1 normal forwards;
 
 }
 .separator{
@@ -29,22 +34,119 @@ body{
 input[type='submit']{
     background-color:#0095f6 !important;
     align-self: center;
+    color: #fff;
 
 }
 input[type='submit'],input[type='file']{
     width: 30%;
     border-radius: 4px;
-    color: white;
     font-weight: 600;
     padding: 2% 2%;
 }
 
 input[type='file']{
     align-self: left;
-    width: 30%;
+    background-color: transparent;
+    width: 100%;
+    color: black;
 }
 
 textarea{
-    border: none;
+    border-radius: 4px;
     background-color: transparent;
+    border: none;
+    padding: 2%;
+    outline: none;
+}
+textarea:focus{
+    border: 1px solid #0095f6;
+}
+
+
+
+@keyframes bounceIn {
+	0% {
+		animation-timing-function: ease-in;
+		opacity: 1;
+		transform: translateY(-250px);
+	}
+
+	24% {
+		opacity: 1;
+	}
+
+	40% {
+		animation-timing-function: ease-in;
+		transform: translateY(-24px);
+	}
+
+	65% {
+		animation-timing-function: ease-in;
+		transform: translateY(-12px);
+	}
+
+	82% {
+		animation-timing-function: ease-in;
+		transform: translateY(-6px);
+	}
+
+	93% {
+		animation-timing-function: ease-in;
+		transform: translateY(-4px);
+	}
+
+	25%,
+	55%,
+	75%,
+	87% {
+		animation-timing-function: ease-out;
+		transform: translateY(0px);
+	}
+
+	100% {
+		animation-timing-function: ease-out;
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+
+
+@media screen and (max-width:500px) {
+	.cont{
+		width: 90%;
+		margin:10% auto;
+		
+	}
+	input[type='submit'],input[type='file']{
+		width: 50%;
+		
+	}
+	
+	input[type='file']{
+		
+		width: 100%;
+		
+	}
+	
+	
+}
+
+@media screen and (min-width:501px) and (max-width:800px) {
+	.cont{
+		width: 70%;
+		margin:10% auto;
+		
+	}
+	input[type='submit'],input[type='file']{
+		width: 60%;
+		
+	}
+	
+	input[type='file']{
+		
+		width: 100%;
+		
+	}
+	
+	
 }

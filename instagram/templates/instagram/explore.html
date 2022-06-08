@@ -1,0 +1,44 @@
+{% extends 'instagram/base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'instagram/css/explore.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+ <div class="posts">
+     {% if posts %}
+        
+     {% for post in posts %}
+     
+            <div class="post">
+            <img src="{{post.image.url}}" alt="{{post.post_caption}}" class="img">
+            <div class="comments-div">
+             <p><a href="{% url 'details' post.id %}">
+                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M4.25 17.31a.75.75 0 0 1-.72-1l1.25-4.12a6.64 6.64 0 0 1-.4-2.19a6.36 6.36 0 0 1 .51-2.51a6.48 6.48 0 0 1 10.53-2.1a6.66 6.66 0 0 1 1.38 2.06a6.46 6.46 0 0 1 0 5a6.66 6.66 0 0 1-1.38 2.06A6.48 6.48 0 0 1 8.59 16l-4.12 1.28a.83.83 0 0 1-.22.03ZM10.84 5a4.9 4.9 0 0 0-1.93.39A5 5 0 0 0 6.27 8a5 5 0 0 0 0 3.87a.75.75 0 0 1 0 .51l-.92 3l3-.92a.75.75 0 0 1 .51 0a5 5 0 0 0 6.51-2.64A5 5 0 0 0 10.84 5Z"/><path fill="currentColor" d="M19.75 20.5a.83.83 0 0 1-.22 0l-4.12-1.25a6.42 6.42 0 0 1-8.17-3.48a.73.73 0 0 1 .38-1a.75.75 0 0 1 1 .38a5.06 5.06 0 0 0 1 1.53a5 5 0 0 0 5.44 1.06a.75.75 0 0 1 .51 0l3 .92l-.92-3a.75.75 0 0 1 0-.51a4.9 4.9 0 0 0 .39-1.93a4.93 4.93 0 0 0-1.45-3.51a5.62 5.62 0 0 0-.67-.71a.75.75 0 1 1 .84-1.24a6.69 6.69 0 0 1 1 .79a6.49 6.49 0 0 1 1.38 2.06a6.38 6.38 0 0 1 .51 2.52a6.63 6.63 0 0 1-.4 2.25l1.25 4.12a.75.75 0 0 1-.72 1Z"/></svg> <span>{{post.comments.all|length}}</span></a></p>
+             <p><a href="{% url 'details' post.id %}""><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8a264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39c-10 6.1-19.5 12.8-28.5 20.1c-9-7.3-18.5-14-28.5-20.1c-41.8-25.5-89.9-39-139.2-39c-35.5 0-69.9 6.8-102.4 20.3c-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9c0 33.3 6.8 68 20.3 103.3c11.3 29.5 27.5 60.1 48.2 91c32.8 48.9 77.9 99.9 133.9 151.6c92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3c56-51.7 101.1-102.7 133.9-151.6c20.7-30.9 37-61.5 48.2-91c13.5-35.3 20.3-70 20.3-103.3c.1-35.3-7-69.6-20.9-101.9z"/></svg> <span>{{post.like.count}}</span></a></p>
+            </div>
+           </div>
+    
+        {% csrf_token %}
+     {% endfor %}
+     {% endif %}
+ </div>
+
+
+</main>
+{% block scripts %}
+
+{% endblock %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

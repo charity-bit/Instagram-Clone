@@ -45,11 +45,10 @@ class CommentForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['image','post_name','post_caption']
+        fields = ['image','post_caption']
 
     def __init__(self,*args,**kwargs):
         super(PostForm,self).__init__(*args,**kwargs)
-        self.fields['post_name'].widget.attrs.update({'placeholder':'name ... '})
         self.fields['post_caption'].widget.attrs.update({'placeholder':'enter caption...'})
 
 

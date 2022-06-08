@@ -4,7 +4,7 @@ body{
 
 main{
     width: 70%;
-    margin:2% auto;
+    margin:5% auto;
     display: flex;
 }
 
@@ -36,6 +36,7 @@ main{
     border-radius: 4px;
     color: #000;
     font-family: 600;
+    font-size: 1vw;
     text-decoration: none;
 }
 .top p a {
@@ -49,6 +50,7 @@ main{
     color: #fff;
     font-weight: 600;
     border: none;
+    font-size: 1vw;
     border-radius: 4px;
 }
 
@@ -61,6 +63,7 @@ main{
 
 .followers p span {
     font-weight: 400 !important;
+    font-size: 1.3vw !important;
 }
 .followers p {
     font-weight: 600;
@@ -85,6 +88,7 @@ main{
     margin: 5% 0;
     color: #a8a8a8;
     font-size: .8vw;
+    width: 90%;
 }
 
 .l-followers a {
@@ -324,17 +328,18 @@ main{
 
 }
 
-
+/* posts */
 .posts{
     width:70%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(270px,1fr));
+    display: flex;
+    flex-wrap: wrap;
     margin:2% auto;
     gap: 20px;
 }
 
 .post{
     position: relative;
+    width: 30%;
     
 }
 .comments-div{
@@ -348,7 +353,7 @@ main{
   row-gap: 20px;
   display: flex;
   height: 100%;
-  width: 90%;
+  width: 100%;
   opacity: 0;
   transition:all .2s ease-in-out;
 }
@@ -370,7 +375,7 @@ main{
 .post img{
     height:412px;
     aspect-ratio: contain;
-    width: 90%;  
+    width: 100%;  
   
 }
 
@@ -382,140 +387,6 @@ main{
 .post p a span{
     background-color: transparent;
 }
-
-
-/* post details */
-.post-details{
-    position: fixed;
-    z-index: 2;
-    background-color: rgba(0, 0, 0, .7);
-    top:0;
-    left:0;
-    height: 100%;
-    width:100%;
-    display: none;
-    align-items: center;
-    animation: showlogout 1s ease 0s 1 normal forwards;
-}
-
-.detail{
-    width: 90%;
-    height: 80%;
-    background-color: white;
-    position: absolute;
-    display: flex; 
-    top:50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    transition:all .2s ease-in-out;
-}
-
-
-.img2 img{
-    width: 270px;
-    height: 100%;
-    margin:auto 0;
-} 
-
-.img3{
-    width: 60%;
-    height: 100%;
-    margin: auto 0;
-}
-.img3 img{
-    width: 100%;
-    height: 100%;
-    margin:auto 0;
-} 
-.comments-section{
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.close-btn{
-    position: absolute;
-    right:3%;
-    top:3%;
-    color: #fff;
-    font-size: 2.5vw;
-}
-
-.author{
-    display: flex;
-    margin: 2% 3%;
-    gap:10px;
-    padding: 2% 5%;
-    align-items: center;
-}
-
-.author a{
-    color:#000;
-    text-decoration: black;
-    font-size: 1.5vw;
-    display: flex;
-    align-items: center;
-}
-.author svg,.comment svg{
-    color: #dbdbdb ;
-    font-size: 2vw;
-}
-.separator{
-    background-color: #dbdbdb ;
-    width: 132%;
-    height: 1px;
-}
-
-.comment{
-    padding: 2% 5%;
-    margin: 2% 3%;
-}
-
-.user
-{
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    font-size: 1.1vw;
-    color: #111;
-    font-weight: 600;
-    gap: 10px;
-}
-
-.content{
-    color: #a8a8a8;
-    font-size: .9vw;
-    margin: 1% 13%;
-   
-}
-
-.post-comment{
-    padding: 5% 0;
-    display: flex;
-    justify-content: center;
-    gap:10px;
-}
-.save-comment{
-    border: none;
-    color: #0095f6;
-    font-weight: 600;
-    background-color: transparent;
-
-}
-textarea{
-    border: 1px solid #0095f6;
-    padding: 2% 5%;
-    border-radius: 5px;
-}
-.cap{
-    display: block !important;
-    font-size: 1vw;
-    margin-top: 2%;
-    color: #000;
-    font-weight: 400;
-}
-
-
 .profile-img{
     height: 10vw;
     width: 10vw;
@@ -533,4 +404,171 @@ textarea{
 		opacity: 1;
 		transform: scale(1);
 	}
+}
+
+.cog{
+    display: flex;
+    align-items: center;
+}
+
+
+@media screen and (max-width:500px) {
+
+    .posts{
+        width:70%;
+        margin:2% auto;
+    
+    }
+    .post{
+        position: relative;
+        width: 100%;
+        
+    }
+
+    .left{
+        display: none;
+    }
+    .right{
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .top p:nth-child(1), .cog svg{
+        font-size: 4.5vw;
+    }
+    .top p a {
+        font-size: 2.5vw;
+    
+    }
+    .edit-p,.followbtn{
+        font-size: 3vw;
+    }
+   
+    .followers p {
+        font-size: 2.5vw;
+    }
+    .followers p span{
+        font-size: 2.5vw !important;
+    }
+    .bio{
+        font-size: 2vw;
+        width: 80%;
+    }
+    .l-followers {
+        font-size: 1.8vw;
+    }
+
+    .followers-list ul li{
+        font-size: 1.3vw;
+    }
+    .followers ul li svg{
+        font-size: 2vw;
+    }
+    .followers-cont p:nth-child(1) a{   
+        font-size: 1.7vw;
+    
+    }
+
+    .s-followers span:nth-child(1){
+        font-size: 1.7vw;
+    }
+
+    .following-list ul li{
+        font-size: 1.4vw;
+    }
+    .following ul li svg{
+        font-size: 2.3vw;
+    }
+    .following-cont p:nth-child(1) a{
+        font-size: 1.5vw;
+    
+    }
+
+
+    .cancel a {
+        font-size: 3vw;
+    }
+}
+
+
+@media screen and (min-width:501px) and (max-width:800px){
+
+    .posts{
+        width:95%;
+        margin:2% auto;
+    
+    }
+    .post{
+        position: relative;
+        width: 45%;
+        
+    }
+    .top p:nth-child(1), .cog svg{
+        font-size: 3vw;
+    }
+    .top p a {
+        font-size: 2vw;
+    
+    }
+    .edit-p,.followbtn{
+        font-size: 2vw;
+    }
+   
+    .followers p {
+        font-size: 1.8vw;
+    }
+    .followers p span{
+        font-size: 1.8vw !important;
+    }
+    .bio{
+        font-size: 1.5vw;
+    }
+    .l-followers {
+        font-size: 1.1vw;
+    }
+
+    .followers-list ul li{
+        font-size: 1.3vw;
+    }
+    .followers ul li svg{
+        font-size: 2vw;
+    }
+    .followers-cont p:nth-child(1) a{   
+        font-size: 1.7vw;
+    
+    }
+
+    .s-followers span:nth-child(1){
+        font-size: 1.7vw;
+    }
+
+    .following-list ul li{
+        font-size: 1.4vw;
+    }
+    .following ul li svg{
+        font-size: 2.3vw;
+    }
+    .following-cont p:nth-child(1) a{
+        font-size: 1.5vw;
+    
+    }
+
+
+    .cancel a {
+        font-size: 1.4vw;
+    }
+
+}
+
+@media screen and (min-width:801px) and (max-width:1000px){
+
+    .posts{
+        width:90%;
+        margin:2% auto;
+    
+    }
+    .post{
+        position: relative;
+        width: 30%;    
+    }
 }

@@ -75,3 +75,7 @@ form input:focus{
     }
     
 }
+
+.active{
+ color: #0095f6 !important; 
+}

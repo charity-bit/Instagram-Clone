@@ -1,4 +1,5 @@
 from email.policy import default
+from operator import mod
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
@@ -6,6 +7,13 @@ from cloudinary.models import CloudinaryField
 from django.utils import timezone
 
 # Create your models here.
+
+
+GENDER_CHOICES = {
+    ('Female','Female'),
+    ('Male','Male'),
+    ('I prefer not to Say','I prefer not to Say')
+}
 class Profile(models.Model):
     '''
     class profile for a user's personal profile
@@ -16,6 +24,8 @@ class Profile(models.Model):
     followers = models.ManyToManyField(User,related_name='owers',blank=True)
     name = models.CharField(max_length=50,blank=True)
     bio = models.CharField(max_length=150,blank=True)
+    gender = models.CharField(max_length=50,choices=GENDER_CHOICES,blank=True,null=True)
+    phone_number = models.BigIntegerField(blank=True,null=True)
 
     def __str__(self) -> str:
         return f'{self.user.username}'
@@ -82,7 +92,6 @@ class Post(models.Model):
     image = CloudinaryField('post_image',blank=True)
     like = models.ManyToManyField(User,related_name='likes',blank=True)
     like_count = models.BigIntegerField(default=0)
-    post_name = models.CharField(max_length=50)
     post_caption = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now) 
 

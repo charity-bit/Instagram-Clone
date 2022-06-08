@@ -1,4 +1,3 @@
-
 .detail{
     width: 90%;
     height: 80%;
@@ -28,17 +27,6 @@
     flex-direction: column;
     gap: 20px;
 }
-.comments{
-    height: 100%;
-}
-.close-btn{
-    position: absolute;
-    right:3%;
-    top:3%;
-    color: #fff;
-    font-size: 2.5vw;
-}
-
 .author{
     display: flex;
     margin: 2% 3%;
@@ -56,7 +44,7 @@
     align-items: center;
 }
 .author svg,.comment svg{
-    color: #dbdbdb ;
+    color: #dbdbdb;
     font-size: 2vw;
 }
 .separator{
@@ -68,6 +56,7 @@
 .comments{
 overflow-y: scroll;
 margin-left: 10%;
+height: 100%;
 }
 .comments::-webkit-scrollbar {
     display: none;
@@ -96,7 +85,9 @@ margin-left: 10%;
 }
 
 .post-comment{
-    padding: 5% 0;
+    padding: 5%;
+    width: 90%;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     gap:10px;
@@ -106,12 +97,12 @@ margin-left: 10%;
     color: #0095f6;
     font-weight: 600;
     background-color: transparent;
-
 }
 textarea{
     border: 1px solid #0095f6;
     padding: 2% 5%;
     border-radius: 5px;
+    width: 100%;
 }
 .cap{
     display: block !important;
@@ -128,3 +119,163 @@ textarea{
     aspect-ratio: contain;
 }
 
+
+
+@media screen and (max-width:500px) {
+    .detail{
+        flex-direction: column;
+        padding: 0;
+    }
+    main{
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .img3{
+        width: 100% !important;
+        height: 70%;
+        padding: 0;
+        margin: 0% auto;
+    }
+    .img3 img{
+        width: 100% !important;
+        height: 100%;
+        margin:auto 0;
+    } 
+    .comments-section{
+        width: 100%;
+    }
+    .comments{
+        height: 200px;
+        overflow-y: scroll;
+    }
+    textarea{
+        width: 100%;
+       
+    }
+    .post-comment{
+        margin-top: -3%;
+    }
+    .separator{
+        width: 100%;
+    }
+
+    .author{
+        margin: 0 3%;
+        align-items: center;
+        padding: 2% 5%;
+    }
+    
+    .author a,.user{
+        font-size: 3vw;
+    }
+    .author svg,.comment svg{
+        font-size: 3vw;
+    }
+    .content{
+        color: #a8a8a8;
+        font-size: 2vw;
+        margin: 0 18%;
+       
+    }
+    .cap{
+        font-size: 2vw;
+
+    }
+    
+    .profile-img{
+        height: 42px;
+        width: 42px;
+        border-radius: 50%;
+        aspect-ratio: contain;
+    }
+    
+    
+
+
+
+
+
+
+
+
+
+}
+
+
+
+@media screen and (min-width:501px) and (max-width:800px) { */
+    .detail{
+        padding: 0;
+    }
+    .img3{
+        width: 70% !important;
+        margin:0 auto;
+        height: 70%;
+        padding: 0;
+        margin: 0% auto;
+    }
+    .img3 img{
+        width: 100% !important;
+        height: 100%;
+        margin:auto 0;
+    } 
+    .comments-section{
+        width: 100%;
+        padding:0 2%;
+    }
+    .comments{
+        height: 200px;
+        overflow-y: scroll;
+    }
+    textarea{
+        width: 100%;
+       
+    }
+    .post-comment{
+        margin-top: -3%;
+    }
+    .separator{
+        width: 100%;
+    }
+
+    .author{
+        margin: 0 3%;
+        align-items: center;
+        padding: 2% 5%;
+    }
+    
+    .author a,.user{
+        font-size: 2vw;
+    }
+    .author svg,.comment svg{
+        font-size: 2vw;
+    }
+    .content{
+        color: #a8a8a8;
+        font-size: 1.5vw;
+        margin: 0 18%;
+       
+    }
+    .cap{
+        font-size: 1.5vw;
+
+    }
+    
+    .profile-img{
+        height: 42px;
+        width: 42px;
+        border-radius: 50%;
+        aspect-ratio: contain;
+    }
+    
+    
+
+
+
+
+
+
+
+
+
+} */

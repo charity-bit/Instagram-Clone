@@ -8,16 +8,10 @@
 
 {% block content %}
 
-<div class="logo">
-  </div>
 
 <main>
     <div class="post-details">
-        <div class="close-btn">
-            <a class="close-b">
-              X
-            </a>
-        </div>
+       
         <div class="detail">
             <div class="img3">
                 <img src="{{post.image.url}}" alt="">
@@ -35,9 +29,6 @@
                         <p><a href="{% url 'profile' post.user %}">{{post.user}}</a></p>
                         <span class="cap">{{post.post_caption}}</span>
                      </div>
-                   
-                     
-                    
                 </div>
                 <div class="separator"></div>
                 <div class="comments">
@@ -74,7 +65,8 @@
                     
                         <textarea class="comment-text" placeholder="add comment ..."></textarea>
                         <button class="save-comment"
-                        data-user="{{request.user}}" data-post="{{post}}" data-pic="{{request.user.profile.profile_pic.url}}">Submit</button>
+                        data-user="{{request.user}}" data-post="{{post}}" 
+                         data-pic="{{request.user.profile.profile_pic.url}}">Submit</button>
                   
                    
                       </div>
@@ -102,12 +94,11 @@
             e.stopPropagation();
            var _comment = $('.comment-text').val()
            var _user = $(this).data('user');
+           console.log(_user)
            var post_id = $(this).data('post');
+           var url = $(this).data('url')
            var pic = $(this).data('pic');
-           console.log(typeof(pic))
-
-           console.log(pic)
-
+          
         //    ajax
 
         $.ajax({
@@ -127,7 +118,7 @@
                         var _html = document.createElement('div')
                        _html.innerHTML = `<div class="comment">\
                         <p> <a class="user"\
-                            href="#">\
+                            href="/profile/${_user}">\
                             <img src="${pic}" alt="" class="profile-img">
                             ${_user}\
                         </a>\

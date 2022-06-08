@@ -1,0 +1,28 @@
+main{
+    width: 60%;
+    display: flex;
+    border: 1px solid #dbdbdb;
+    margin:5% auto;
+    
+}
+
+.left{
+    width: 30%;
+    height: 100%;
+}
+
+.right{
+    width: 70%;   
+}
+
+.right form{
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+.separator{
+    background-color: #dbdbdb;
+    width: 1px;
+    height: 50 !important;
+}

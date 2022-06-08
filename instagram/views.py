@@ -1,9 +1,7 @@
-from multiprocessing import context
-from re import template
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.decorators.csrf import csrf_exempt,csrf_protect
+from django.views.decorators.csrf import csrf_exempt
 from  django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
@@ -12,6 +10,7 @@ from django.utils.decorators import method_decorator
 
 from django.contrib.auth.views import LoginView
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -134,7 +133,14 @@ class AddpostView(CreateView):
     model = Post
     template_name = 'instagram/post_form.html'
     form_class = PostForm
-    success_url = reverse_lazy('home')
+    
+
+
+    def get_success_url(self):
+        return reverse_lazy('profile',kwargs={
+            'username': self.request.user.username # on success edit return to profile page
+        })
+
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -180,7 +186,7 @@ def like(request):
 
 class UpdateProfile(UpdateView):
     model = Profile
-    fields = ['profile_pic','name','bio']
+    fields = ['profile_pic','name','bio','phone_number','gender']
     template_name = 'instagram/edit_profile.html'
 
 
@@ -232,6 +238,11 @@ def search_user(request):
     else:
         message = 'you have not searches for anything'
         return render(request,'gallery/search.html',{'message':message})
+
+class PostList(ListView):
+    model = Post
+    context_object_name = 'posts'
+    template_name = 'instagram/explore.html'
 
 
     

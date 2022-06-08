@@ -68,10 +68,12 @@ body{
     border: none;
 }
 
-.bottom button svg{
+.bottom  svg{
     font-size: 2vw;
 
 }
+
+
 
 .comments{
     padding: 2% 5%;
