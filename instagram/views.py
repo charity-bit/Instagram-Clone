@@ -5,12 +5,15 @@ from django.views.decorators.csrf import csrf_exempt
 from  django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 
 
 from django.contrib.auth.views import LoginView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -57,7 +60,7 @@ def register(request):
 
     return render(request,'instagram/register.html',context)
 
-# \\timeline
+@login_required(login_url='/')
 def home(request):
     following = Follow.objects.filter(follower = request.user).exclude(account = request.user)
     posts = Post.objects.all().order_by('-date_posted')
@@ -75,7 +78,7 @@ def home(request):
     return  render(request,'instagram/index.html',context)
 
 
-
+@login_required(login_url='/')
 def profile(request,username):
     user = None
     full_user = None
@@ -105,6 +108,7 @@ def profile(request,username):
     return render(request,'instagram/profile.html',context)
 
 @csrf_exempt
+@login_required(login_url='/')
 def follow(request):
     if request.method == 'POST':
         result = ''
@@ -126,7 +130,7 @@ def follow(request):
 
 
 @method_decorator(csrf_exempt,name='dispatch')
-class AddpostView(CreateView):
+class AddpostView(LoginRequiredMixin,CreateView):
     model = Post
     template_name = 'instagram/post_form.html'
     form_class = PostForm
@@ -144,7 +148,7 @@ class AddpostView(CreateView):
         return super(AddpostView,self).form_valid(form)
   
 
-
+@login_required(login_url='/')
 def save_comment(request):
     if request.method == 'POST':
         comment = request.POST['comment']
@@ -158,6 +162,7 @@ def save_comment(request):
 
         return JsonResponse({'bool':True})
 
+@login_required(login_url='/')
 def like(request):
     if request.POST.get('action') == 'post':
         result = ''
@@ -181,7 +186,7 @@ def like(request):
         return JsonResponse({'result':post.like.count(),'data':data})
 
 
-class UpdateProfile(UpdateView):
+class UpdateProfile(LoginRequiredMixin,UpdateView):
     model = Profile
     fields = ['profile_pic','name','bio','phone_number','gender']
     template_name = 'instagram/edit_profile.html'
@@ -202,7 +207,7 @@ class UpdateProfile(UpdateView):
         form.instance.user = self.request.user
         return super(UpdateProfile,self).form_valid(form)
 
-
+@login_required(login_url='/')
 def search_user(request):
     full_user = None
     counted = None
@@ -236,7 +241,7 @@ def search_user(request):
         message = 'you have not searches for anything'
         return render(request,'gallery/search.html',{'message':message})
 
-class PostList(ListView):
+class PostList(LoginRequiredMixin,ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'instagram/explore.html'
@@ -252,7 +257,7 @@ class PostList(ListView):
 
     
 
-class PostDetail(DetailView):
+class PostDetail(LoginRequiredMixin,DetailView):
     model = Post
     context_object_name = 'post'
     template_name ='instagram/details.html'
