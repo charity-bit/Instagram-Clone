@@ -43,6 +43,8 @@ class CustomLoginView(LoginView):  #created custom loginView in order to use a d
 
 @csrf_exempt
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
 
