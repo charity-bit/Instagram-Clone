@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../virtual/lib/python3.9/site-packages/django_phonenumbers/static/django_phonenumbers/flag-icon-css-master/sass/variables.scss"
+    ],
+    "names": [],
+    "file": "variables.css"
+}
