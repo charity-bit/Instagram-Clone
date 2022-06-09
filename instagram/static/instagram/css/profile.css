@@ -353,6 +353,9 @@ main{
 /* transitions */
 
 
+.saved{
+    display: none;
+}
 
 .post{
     position: relative;
