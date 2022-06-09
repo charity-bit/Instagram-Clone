@@ -1,4 +1,4 @@
-<img src="">
+
 
 # Instagram-Clone
 A website appplication built using python <a href='https://docs.djangoproject.com/en/4.0/'>(DJango)</a> that mimics Instagram to allow users to. <a href='https://ins-ta.herokuapp.com/'>Live site</a>
