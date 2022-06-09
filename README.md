@@ -1,7 +1,7 @@
 
 
 # Instagram-Clone
-A website appplication built using python <a href='https://docs.djangoproject.com/en/4.0/'>(Django)</a> that mimics Instagram to allow users to. <a href='https://ins-ta.herokuapp.com/'>Live site</a>
+A website appplication built using python <a href='https://docs.djangoproject.com/en/4.0/'>(Django)</a> that mimics Instagram to allow users to, <a href='https://ins-ta.herokuapp.com/'>Live site</a>
 
 <ol>
 <li> Post Images</li>
@@ -33,7 +33,7 @@ A website appplication built using python <a href='https://docs.djangoproject.co
 
 ## Application Structure
 
-The applucation uses Django's MVT (Model-View-Template) architecture which is a software design pattern for developing a web application. 
+The application uses Django's MVT (Model-View-Template) architecture which is a software design pattern for developing a web application. 
 
 <strong>Model </strong> - The model is going to act as the interface of your data. It is responsible for maintaining data. It is the logical data structure behind the entire application and is represented by a database (generally relational databases such as MySql, Postgres). <a href='https://docs.djangoproject.com/en/4.0/topics/db/models/'>Django Models</a>
 
