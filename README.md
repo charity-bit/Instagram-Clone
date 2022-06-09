@@ -169,7 +169,7 @@ Ajax and Jquery
 
 ## Licence
 
-   copyright © Charity 2022 - <a href="#"> MIT </a>
+   copyright © Charity 2022 - <a href="https://github.com/charity-bit/Instagram-Clone/blob/main/LICENSE"> MIT </a>
 
 ## Authors Info
 
