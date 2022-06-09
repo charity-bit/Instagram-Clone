@@ -12,6 +12,7 @@ A website appplication built using python <a href='https://docs.djangoproject.co
 <li>Comment on any post </li>
 <li> Search for any user and view their profile </li>
 <li> Explore to view posts by all users </li>
+<li> Edit their personal profiles </li>
 <ol>
 <br>
 
