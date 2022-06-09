@@ -1,7 +1,7 @@
 <img src="">
 
 # Instagram-Clone
-A website appplication built using python <a href='https://docs.djangoproject.com/en/4.0/'>(DJango)</a> that mimics Instagram to allow users to.
+A website appplication built using python <a href='https://docs.djangoproject.com/en/4.0/'>(DJango)</a> that mimics Instagram to allow users to. <a href='https://ins-ta.herokuapp.com/'>Live site</a>
 
 <ol>
 <li> Post Images</li>
@@ -20,9 +20,9 @@ A website appplication built using python <a href='https://docs.djangoproject.co
 - [Application Structure](#application-structure)
 - [Installation Requirement](#Installation)
 - [Technology Used](#technology-used)
+- [Demo](#demo)
 - [Licence](#licence)
 - [Authors Info](#author-Info)
-- [ToDO](#To-Do)
 
 
 ## Prequisite
@@ -119,9 +119,51 @@ PSQL
 Javascript
 </li>
 <li>
+CSS
+</li>
+<li>
 Ajax and Jquery
 </li>
 </ul>
+
+<br>
+
+## Demo
+
+<h4> Timeline </h4>
+
+<img src="./images/timeline.png">
+
+<br>
+
+<h4> Explore </h4>
+
+<img src="./images/explore.png">
+
+<br>
+
+<h4> Add Post </h4>
+
+<img src="./images/post.png">
+
+<br>
+
+<h4> Add Comment </h4>
+
+<img src="./images/comment.png">
+
+<br>
+
+<h4>User Profiles </h4>
+
+<img src="./images/user_profile.png">
+
+<br>
+
+<img src="./images/follow.png">
+
+
+
 
 
 ## Licence
