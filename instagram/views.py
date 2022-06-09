@@ -134,10 +134,7 @@ def follow(request):
             # if len(Follow.objects.filter(account=account, follower=request.user)) == 2:
             #     Follow.objects.filter(account=account, follower=request.user).first().delete()
         return  JsonResponse({'res':account.followers.count(),'list':followers_list})
-        
     
-
-
 
 @method_decorator(csrf_exempt,name='dispatch')
 class AddpostView(LoginRequiredMixin,CreateView):
