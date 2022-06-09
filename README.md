@@ -67,7 +67,7 @@ $ source virtual/bin/activate #to activate the virtual enviroment
 ```
 
 <br>
-create a .env file in the root folder to save your configuration variables that are neccessary in order for the apllication to run.
+create a .env file in the root folder to save your configuration variables that are neccessary in order for the application to run.
 
 <br>
 
@@ -92,7 +92,7 @@ DISABLE_COLLECTSTATIC=1
 
 ```
 
-- Assuming you already created an application, You can now run the application.
+- Assuming you already created the application database, You can now run the application.
 
 ## Run the application using 
 
