@@ -8,8 +8,8 @@ A website appplication built using python <a href='https://docs.djangoproject.co
 <li> Like Images</li>
 <li> Save Images to their profiles </li>
 <li> Follow and Unfollow other users </li>
-<li> View posts by users they have followed in their timelines </li>
-<li>Comment on any post </li>
+<li> View posts by users have those of users they have followed be displayed in their timelines </li>
+<li> Comment on any post </li>
 <li> Search for any user and view their profile </li>
 <li> Explore to view posts by all users </li>
 <li> Edit their personal profiles </li>
