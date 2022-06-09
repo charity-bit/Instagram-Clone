@@ -43,9 +43,9 @@
     {% else %}
     <!-- follow buttons -->
         {% if notfollowing %}
-        <button class="followbtn" id="{{username.id}}" bool="true">Following</button>
+        <button class="followbtn" id="{{username.id}}" bool="true" data-count='{{followers.count}}'>Following</button>
         {% else %}
-        <button class="followbtn" id="{{username.id}}" bool="false">follow</button>
+        <button class="followbtn" id="{{username.id}}" bool="false" data-count='{{followers.count}}'>follow</button>
         {% endif %}
         <!-- end of follow buttons -->
     
@@ -61,10 +61,10 @@
       
      <!-- followers -->
      {% if followers.count == 1 %}
-     <p class="s-followers"><span>{{followers.count}}</span> <span>follower</span></p>
+     <p class="s-followers"><span>{{followers.count}}</span> <span class="fol">follower</span></p>
         
      {% else %}
-     <p class='s-followers'> <span>{{followers.count}}</span> <span>followers</span></p>
+     <p class='s-followers'> <span>{{followers.count}}</span> <span class="fol">followers</span></p>
      {% endif %}
 
      <!-- following -->
@@ -142,9 +142,20 @@
 
     {% if followers %}
      {% if followers|length > 3%}
+        
       
      <p class="l-followers">followed by
-          <a href="/profile/{{followers.0}}">{{followers.0}}</a>,<a href="/profile/{{followers.1}}"">{{followers.1}}</a>.<a href="/profile/{{followers.2}}"">{{followers.2}}</a> and {{counted}} others</p>
+
+          <a href="/profile/{{followers.0}}">{{followers.0}}</a>,<a href="/profile/{{followers.1}}"">{{followers.1}}</a>.<a href="/profile/{{followers.2}}"">{{followers.2}}</a>
+            {% if counted > 1 %}
+            and {{counted}} others
+            {% else %}
+            and {{counted}} other
+            {% endif%}
+          
+        
+        </p>
+          
       {% elif followers|length == 3  %}
        <p class="l-followers"> followed by 
         <a href="/profile/{{followers.0}}"">{{followers.0}}</a>,<a href="/profile/{{followers.1}}"">{{followers.1}}</a> and <a href="/profile/{{followers.2}}"">{{followers.2}}</a></p>
@@ -205,7 +216,10 @@
 <script>
 
 $(document).ready(function(){
-    var btn = document.querySelector('.followbtn')
+    var btn = document.querySelector('.followbtn');
+    var fol = document.querySelector('.fol');
+    follow_list = document.querySelector('.l-followers');
+    followers_count = document.querySelector('.s-followers');
     $(btn).on('click',function(){
        
     var id  = $(this).attr('id')
@@ -218,7 +232,7 @@ $(document).ready(function(){
         data:{
             user_id:$(this).attr('id')
         },
-        success:function(res){
+        success:function(json){
          if(bool == 'true'){
              $('#'+id).text('Follow')
              $('#'+id).attr('bool','false')
@@ -228,9 +242,52 @@ $(document).ready(function(){
             $('#'+id).text('Following')
              $('#'+id).attr('bool','true')
          }
-         document.querySelector('.s-followers').firstElementChild.innerText = res
-         console.log(res)
+         if (json['res'] == 1){
+             
+            followers_count .firstElementChild.innerText = json['res'];
+            fol.innerHTML = 'follower';
+            follow_list.innerHTML = `followed by <a href="/profile/${json['list'][0]}"> ${json['list'][0]}</a>`
+            
+         }
 
+         else if (json['res'] == 0){
+            follow_list.innerHTML = 'No followers yet'
+            followers_count.firstElementChild.innerText = json['res'];
+            fol.innerHTML = 'followers';
+            
+         }
+
+         else if (json['res'] > 1) {
+            followers_count .firstElementChild.innerText = json['res'];
+            fol.innerHTML = 'followers';
+            if (json['res'] == 3){
+                follow_list.innerHTML = `followed by 
+               <a href="/profile/${json['list'][0]}">${json['list'][0]}</a>, <a href="/profile/${json['list'][1]}">${json['list'][1]}</a> and <a href="/profile/${json['list'][2]}">${json['list'][2]}</a></p>`
+            }
+
+            else if (json['res'] == 2){
+                follow_list.innerHTML = `followed by 
+               <a href="/profile/${json['list'][0]}">${json['list'][0]}</a> and <a href="/profile/${json['list'][1]}">${json['list'][1]}</a>`
+           
+            }
+
+            else {
+                if (json['res'] - 3 == 1){
+
+                    follow_list.innerHTML = `followed by 
+               <a href="/profile/${json['list'][0]}">${json['list'][0]}</a>,<a href="/profile/${json['list'][1]}">${json['list'][1]}</a>, <a href="/profile/${json['list'][2]}">${json['list'][2]}</a> and ${json['res'] - 3} other</p>`
+
+                }
+
+
+                else{
+                    follow_list.innerHTML = `followed by 
+               <a href="/profile/${json['list'][0]}">${json['list'][0]}</a>,<a href="/profile/${json['list'][1]}">${json['list'][1]}</a>, <a href="/profile/${json['list'][2]}">${json['list'][2]}</a> and ${json['res'] - 3} others </p>`
+
+                }
+                
+            }
+         }
         }
     })
      }) 

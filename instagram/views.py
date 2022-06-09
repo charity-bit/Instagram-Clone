@@ -115,6 +115,7 @@ def profile(request,username):
 def follow(request):
     if request.method == 'POST':
         result = ''
+        followers_list = []
         user_id = int(request.POST.get('user_id'))
         account = User.objects.get(pk=user_id)  
 
@@ -124,9 +125,15 @@ def follow(request):
         else:
             foll_obj = Follow(account=account, follower=request.user)  
             foll_obj.save()
+
+        followers =  Follow.objects.filter(account = account).exclude(follower = account)
+        if followers:
+            for follower in followers:
+                followers_list.append(follower.follower.username)
+              
             # if len(Follow.objects.filter(account=account, follower=request.user)) == 2:
             #     Follow.objects.filter(account=account, follower=request.user).first().delete()
-        return  HttpResponse(account.followers.count())
+        return  JsonResponse({'res':account.followers.count(),'list':followers_list})
         
     
 
