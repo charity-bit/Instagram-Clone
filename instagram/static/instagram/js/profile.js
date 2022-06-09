@@ -89,29 +89,8 @@ closeFollowing.addEventListener('click',()=>{
 
 
 
-// image details
 
 
-const btn = document.querySelector('.close-btn');
-const posts = document.querySelectorAll('.post');
-
-
- posts.forEach(function(post){
-    post.addEventListener('click',()=>{
-        console.log(post)
-     
-     post.lastElementChild.style.display = 'none';
-        document.body.style.overflow = 'hidden';
-    })
- 
-    btn.addEventListener('click',()=>{
-        console.log(btn)
-     btn.parentElement.parentElement.style.display = 'none'
-     // post.display='flex'
-     
-     })
- })
- 
   
 
 

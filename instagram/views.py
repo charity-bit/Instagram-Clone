@@ -21,7 +21,7 @@ from .forms import RegistrationForm,CustomAuthForm,PostForm
 
 
 
-from .models import Follow, Profile, User,Post,Comment
+from .models import Follow, Profile, User,Post,Comment,Saved
 
 
 # Create your views here.
@@ -67,16 +67,24 @@ def register(request):
 def home(request):
     following = Follow.objects.filter(follower = request.user).exclude(account = request.user)
     posts = Post.objects.all().order_by('-date_posted')
+    saved_objects = Saved.objects.filter(user = request.user).order_by('-date_saved')
     post_followed = []
+    saved_posts = []
 
     for post in posts:  #get all posts
         for follower in following:   #get all followings
             if post.user == follower.account:  #check if author in followers
-                print(post.user)
                 post_followed.append(post)
+
+        for saved in saved_objects:
+            if post.id == saved.post.id:
+                saved_posts.append(post)
+
+        
             
     context = {
-        'posts':post_followed
+        'posts':post_followed,
+        'saved_p':saved_posts
     }
     return  render(request,'instagram/index.html',context)
 
@@ -96,13 +104,26 @@ def profile(request,username):
     count = len(Follow.objects.filter(account = user).exclude(follower = user))
     if count > 3:
         counted = count - 3
+
+
+
+    saved_objects = Saved.objects.filter(user = user).order_by('-date_saved')
+    saved_p = []
+
+
+    for post in Post.objects.all():
+        for saved in saved_objects:
+            if post.id == saved.post.id:
+                saved_p.append(post)
         
-            
+
+    
     context = {
         'posts': Post.objects.filter(user = user).order_by('-date_posted'),
         'followers': Follow.objects.filter(account = user).exclude(follower = user), #get followers excluding the current user/ own account
         'following': Follow.objects.filter(follower = user).exclude(account = user),
         'notfollowing': Follow.objects.filter(follower = request.user,account = user),
+        'saved_p':saved_p,
         'username':user,
         'full_user':full_user,
         'counted':counted
@@ -189,7 +210,7 @@ def like(request):
             data = 1
             result = post.like_count
             post.save()
-        # print(result)
+        
         return JsonResponse({'result':post.like.count(),'data':data})  # results passed to success function ajax
 
 
@@ -230,13 +251,14 @@ def search_user(request):
                 counted = count - 3
         # elif user is None:
         #     return HttpResponse('no such user')
-        
-        
+
+       
 
 
-
+    
         context = {
         'posts': Post.objects.filter(user = user).order_by('-date_posted'),
+        # 'saved': saved,
         'followers': Follow.objects.filter(account = user).exclude(follower = user), #get followers excluding the current user/ own account
         'following': Follow.objects.filter(follower = user).exclude(account = user),
         'notfollowing': Follow.objects.filter(follower = request.user,account = user),
@@ -258,9 +280,6 @@ class PostList(LoginRequiredMixin,ListView):
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
         context['posts'] = context['posts'].all().order_by('-date_posted')
-
-
-
         return context 
 
 
@@ -270,3 +289,35 @@ class PostDetail(LoginRequiredMixin,DetailView):
     model = Post
     context_object_name = 'post'
     template_name ='instagram/details.html'
+
+
+def save_post(request):
+    
+    if request.method == 'GET':
+
+        # get postid from the frontend
+        post_id = request.GET.get('post_id')
+        
+         # state 
+        state = 0
+
+
+        # get user and post from the database
+        post = Post.objects.get(id = post_id)
+        user = User.objects.get(id = request.user.id)
+        
+        if Saved.objects.filter(user = user ,post = post).exists():
+            Saved.objects.filter(user = user ,post = post).delete()
+
+            state = 0
+        else:
+            saved_post = Saved(user = user,post = post)
+            saved_post.save()
+            state = 1
+        return JsonResponse({'state':state})
+
+    else:
+
+        return HttpResponse('not a GET response')
+
+    

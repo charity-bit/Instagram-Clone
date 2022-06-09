@@ -104,6 +104,9 @@ body{
     text-decoration: none; 
 }
 
+.filled{
+    color: #0095f6;
+}
 
 
  @media screen and (max-width:500px) {

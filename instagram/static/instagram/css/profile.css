@@ -303,16 +303,26 @@ main{
     width: 100%;
 }
 .posts-ttl{
-    position: relative;
+    /* position: relative; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
 }
 
 .posts-ttl a{
     display: flex;
-    color: #000;
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    position: relative;
 
+}
+.hide{
+    color:#0095f6;
+}
+.show{
+    color: #000;
 }
     
 .posts-ttl a::before{
@@ -324,7 +334,7 @@ main{
     transform: translateX(-50%);
     right: 0;
     height: 1px;
-    width: 4%;
+    width: 100%;
 
 }
 
@@ -335,7 +345,14 @@ main{
     flex-wrap: wrap;
     margin:2% auto;
     gap: 20px;
+    
+
 }
+
+
+/* transitions */
+
+
 
 .post{
     position: relative;
@@ -394,6 +411,8 @@ main{
     aspect-ratio: 1/1;
     margin-left: 50%;
 }
+
+
 @keyframes showlogout {
 	0% {
 		opacity: 0;
@@ -411,6 +430,9 @@ main{
     align-items: center;
 }
 
+.saved-items{
+    display: none;
+}
 
 @media screen and (max-width:500px) {
 

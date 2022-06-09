@@ -141,6 +141,21 @@ class Post(models.Model):
         return posts
 
     
+
+
+class Saved(models.Model):
+    '''
+
+    model for image's post
+    '''
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='saved_posts')
+    post = models.ForeignKey(Post,blank=True,null=True,on_delete=models.CASCADE)
+    date_saved = models.DateTimeField(default=timezone.now,null=True)
+
+
+    def __str__(self):
+        return str(self.post)
+
 class Comment(models.Model):
     comment = models.TextField()
     post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')

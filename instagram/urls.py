@@ -16,6 +16,7 @@ urlpatterns = [
     path('add-comment/',views.save_comment,name='comment'),
     path('add-like/',views.like,name='like'),
     path('follow/',views.follow,name='follow'),
+    path('save/',views.save_post,name='save'),
     path('profile/<int:pk>/edit/',UpdateProfile.as_view(),name='update-profile'),
 
 
@@ -25,5 +26,6 @@ urlpatterns = [
     path('timeline/',views.home,name='home'),
     path('search/',views.search_user,name='search'),
     path('explore/all/',PostList.as_view(),name = 'explore')
+
 
 ]
